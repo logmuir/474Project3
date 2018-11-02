@@ -8,7 +8,7 @@ _this = this
 
 // Async function to get the Itinerary List
 
-exports.getItinerarys = async function(query, page, limit){
+exports.getItinerarys = async function (query, page, limit) {
 
     // Options setup for the mongoose paginate
 
@@ -16,12 +16,12 @@ exports.getItinerarys = async function(query, page, limit){
         page,
         limit
     }
-    
+
     // Try Catch the awaited promise to handle the error 
-    
+
     try {
         var itinerarys = await Itinerary.paginate(query, options)
-        
+
         // Return the itineraryd list that was retured by the mongoose promise
 
         return itinerarys;
@@ -34,8 +34,8 @@ exports.getItinerarys = async function(query, page, limit){
     }
 }
 
-exports.createItinerary = async function(itinerary){
-    
+exports.createItinerary = async function (itinerary) {
+
     // Creating a new Mongoose Object by using the new keyword
 
     var newItinerary = new Itinerary({
@@ -45,35 +45,35 @@ exports.createItinerary = async function(itinerary){
         status: itinerary.status
     })
 
-    try{
+    try {
 
         // Saving the Itinerary 
 
         var savedItinerary = await newItinerary.save()
 
         return savedItinerary;
-    }catch(e){
-      
+    } catch (e) {
+
         // return a Error message describing the reason     
 
         throw Error("Error while Creating Itinerary")
     }
 }
 
-exports.updateItinerary = async function(itinerary){
+exports.updateItinerary = async function (itinerary) {
     var id = itinerary.id
 
-    try{
+    try {
         //Find the old Itinerary Object by the Id
-    
+
         var oldItinerary = await Itinerary.findById(id);
-    }catch(e){
+    } catch (e) {
         throw Error("Error occured while Finding the Itinerary")
     }
 
     // If no old Itinerary Object exists return false
 
-    if(!oldItinerary){
+    if (!oldItinerary) {
         return false;
     }
 
@@ -88,25 +88,25 @@ exports.updateItinerary = async function(itinerary){
 
     console.log(oldItinerary)
 
-    try{
+    try {
         var savedItinerary = await oldItinerary.save()
         return savedItinerary;
-    }catch(e){
+    } catch (e) {
         throw Error("And Error occured while updating the Itinerary");
     }
 }
 
-exports.deleteItinerary = async function(id){
-    
+exports.deleteItinerary = async function (id) {
+
     // Delete the Itinerary
 
-    try{
-        var deleted = await Itinerary.remove({_id: id})
-        if(deleted.result.n === 0){
+    try {
+        var deleted = await Itinerary.remove({ _id: id })
+        if (deleted.result.n === 0) {
             throw Error("Itinerary Could not be deleted")
         }
         return deleted
-    }catch(e){
+    } catch (e) {
         throw Error("Error Occured while Deleting the Itinerary")
     }
 }
