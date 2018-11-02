@@ -7,6 +7,11 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var mongoose = require('mongoose')
+mongoose.connect('mongodb://127.0.0.1:27017/todoapp', { useMongoClient: true})
+.then(()=> { console.log(`Succesfully Connected to the Mongodb Database  at URL : mongodb://127.0.0.1:27017/todoapp`)})
+.catch(()=> { console.log(`Error Connecting to the Mongodb Database at URL : mongodb://127.0.0.1:27017/todoapp`)})
+
 var app = express();
 
 // view engine setup
