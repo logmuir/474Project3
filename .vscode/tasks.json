@@ -1,0 +1,22 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "NG Serve Frontend",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/frontend && ng serve"
+        },
+        {
+            "label": "Nodemon Backend",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/TravelExpress && nodemon ./bin/www"
+        },
+        {
+            "label": "Start Mongo DB",
+            "type": "shell",
+            "command": "sudo service mongod start"
+        }
+    ]
+}
