@@ -11,12 +11,14 @@
         {
             "label": "Nodemon Backend",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/TravelExpress && nodemon ./bin/www"
+            "command": "cd ${workspaceFolder}/TravelExpress && nodemon ./bin/www",
+            "problemMatcher": []
         },
         {
             "label": "Start Mongo DB",
             "type": "shell",
-            "command": "sudo service mongod start"
+            "command": "sudo service mongod start",
+            "problemMatcher": []
         }
     ]
 }
