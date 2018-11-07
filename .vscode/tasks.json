@@ -6,7 +6,8 @@
         {
             "label": "NG Serve Frontend",
             "type": "shell",
-            "command": "cd ${workspaceFolder}/frontend && ng serve"
+            "command": "cd ${workspaceFolder}/frontend && ng serve",
+            "problemMatcher": []
         },
         {
             "label": "Nodemon Backend",
@@ -18,6 +19,14 @@
             "label": "Start Mongo DB",
             "type": "shell",
             "command": "sudo service mongod start",
+            "problemMatcher": []
+        },
+        {
+            "label": "Serve backend and frontend",
+            "dependsOn": [
+                "Nodemon Backend",
+                "NG Serve Frontend"
+            ],
             "problemMatcher": []
         }
     ]
