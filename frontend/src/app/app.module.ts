@@ -11,18 +11,17 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ItineraryDataComponent } from './views/itinerary-data/itinerary-data.component';
 import { HomeComponent } from './views/home/home.component';
 import { FoursquareService } from './Foursquare/services/foursquare.service';
-
-import {TableModule} from 'ngx-easy-table';
+import { ItineraryComponent } from './views/itinerary/itinerary.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ItineraryDataComponent,
-    HomeComponent
+    HomeComponent,
+    ItineraryComponent
   ],
   imports: [
     BrowserModule,
-    TableModule,
     HttpClientModule,
     FormsModule,
     NgbModule.forRoot(),

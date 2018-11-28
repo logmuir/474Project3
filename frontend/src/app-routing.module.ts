@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ItineraryDataComponent } from './app/views/itinerary-data/itinerary-data.component';
 import { HomeComponent } from './app/views/home/home.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ItineraryComponent } from './app/views/itinerary/itinerary.component';
 
 const appRoutes: Routes = [
   { path: 'home',
@@ -11,9 +12,14 @@ const appRoutes: Routes = [
     data: {title: 'Home'}
   },
   {
-    path: 'itinerary-data',
+    path: 'foursquare',
     component: ItineraryDataComponent,
     data: { title: 'Foursquare List' }
+  },
+  {
+    path: 'itinerary',
+    component: ItineraryComponent,
+    data: {title: 'Itinerary DB'}
   }
 ];
 
