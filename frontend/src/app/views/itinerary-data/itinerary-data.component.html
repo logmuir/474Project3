@@ -16,13 +16,8 @@
           <tr *ngFor="let event of group.items">
               <td> {{ event.venue.name }}</td>
               <td> {{ event.venue.location.address }} </td>
-              <td> {{ event.venue.location.distance }}</td>
-              <!---<ng-template ngFor let-categories [ngForOf]='events.response.groups.items'>
-                  <tr *ngFor="let category of categories">
-                      <td>{{ category.name }}</td>
-                      <td>{{ category.icon }}</td>
-                  </tr>
-              </ng-template>-->
+              <td> {{ event.venue.categories }}</td>
+              <td> {{ event.venue.categories.name }}</td>
           </tr>
         </ng-template>
       </table>

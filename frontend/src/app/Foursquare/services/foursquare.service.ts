@@ -23,9 +23,8 @@ import { map } from 'rxjs/operators';
     }
 
     getAllNear(place : string): Observable<Array<any>>{
-      place = "newark,nj"
+      place = "newark,de"
       const url = this.baseUri + '?near=' + place + this.extra;
-      //console.log(isArray(this.http.get<any[]>(url).pipe(map(data => data))))
       return this.http.get<any[]>(url).pipe(map(data => data));
     }
 } 

@@ -13,7 +13,7 @@ export class ItineraryDataComponent implements OnInit {
   //public show:boolean = false;
   //public buttonName:any = 'Show';
   events:any[] = [];
-  place: string = 'newark,nj';
+  place: string = 'newark,de';
 
   p: number = 1;
   
