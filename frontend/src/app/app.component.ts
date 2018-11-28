@@ -1,6 +1,6 @@
 import { Response } from '@angular/http';
-import { ItineraryService } from './services/itinerary.service';
-import Itinerary from './models/itinerary.model';
+import { ItineraryService } from './Itinerary/services/itinerary.service';
+import Itinerary from './Itinerary/models/itinerary.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  title='Travel Express';
 
   constructor(
     //Private itineraryservice will be injected into the component by Angular Dependency Injector
