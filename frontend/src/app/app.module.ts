@@ -6,7 +6,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from '../app-routing.module';
 import { ItineraryDataComponent } from './views/itinerary-data/itinerary-data.component';
 import { HomeComponent } from './views/home/home.component';

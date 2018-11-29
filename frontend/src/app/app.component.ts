@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  title='Travel Express';
+  title = 'Travel Express';
 
   constructor(
     //Private itineraryservice will be injected into the component by Angular Dependency Injector

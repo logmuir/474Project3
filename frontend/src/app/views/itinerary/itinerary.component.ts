@@ -4,7 +4,7 @@ import Itinerary from './../../Itinerary/models/itinerary.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-itinerary',
+  selector: 'itineraryComponentSelector',
   templateUrl: './itinerary.component.html',
   styleUrls: ['./itinerary.component.css']
 })
@@ -15,14 +15,14 @@ export class ItineraryComponent implements OnInit {
     private itineraryService: ItineraryService
   ) { }
 
-   //Declaring the new itinerary Object and initilizing it
-   public newItinerary: Itinerary = new Itinerary()
+  //Declaring the new itinerary Object and initilizing it
+  public newItinerary: Itinerary = new Itinerary()
 
-   //An Empty list for the visible itinerary list
-   itinerarysList: Itinerary[];
-   editItinerarys: Itinerary[] = [];
+  //An Empty list for the visible itinerary list
+  itinerarysList: Itinerary[];
+  editItinerarys: Itinerary[] = [];
 
-   create() {
+  create() {
     this.itineraryService.createItinerary(this.newItinerary)
       .subscribe((res) => {
         this.itinerarysList.push(res.data)
