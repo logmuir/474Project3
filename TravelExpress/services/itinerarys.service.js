@@ -27,10 +27,10 @@ exports.getItinerarys = async function (query, page, limit) {
         return itinerarys;
 
     } catch (e) {
-
+        
         // return a Error message describing the reason 
 
-        throw Error('Error while Paginating Itinerarys')
+        throw Error(e)
     }
 }
 

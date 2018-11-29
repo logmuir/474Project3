@@ -13,7 +13,7 @@ var bluebird = require('bluebird')
 
 var mongoose = require('mongoose')
 mongoose.Promise = bluebird
-mongoose.connect('mongodb://100.34.18.126:65503/todoapp', {useNewUrlParser: true})
+mongoose.connect('mongodb://ToDoAppReadWriteUser:PASSWORDHERE@100.34.18.126:65503/todoapp?authsource=admin', {useNewUrlParser: true})
   .then(() => { console.log(`Succesfully Connected to the Mongodb Database  at URL : mongodb://100.34.18.126:65503/todoapp`)})
   .catch(() => { console.log(`Error Connecting to the Mongodb Database at URL : mongodb://100.34.18.126:65503/todoapp`) });
 
