@@ -11,11 +11,21 @@ var api = require('./routes/api.route')
 
 var bluebird = require('bluebird')
 
+var fs = require('fs');
+var mongoPassword = fs.readFileSync('./mongoPassword.txt', 'utf8');
+
 var mongoose = require('mongoose')
 mongoose.Promise = bluebird
-mongoose.connect('mongodb://ToDoAppReadWriteUser:PASSWORDHERE@100.34.18.126:65503/todoapp?authsource=admin', {useNewUrlParser: true})
-  .then(() => { console.log(`Succesfully Connected to the Mongodb Database  at URL : mongodb://100.34.18.126:65503/todoapp`)})
-  .catch(() => { console.log(`Error Connecting to the Mongodb Database at URL : mongodb://100.34.18.126:65503/todoapp`) });
+
+var mongooseConnectionString = 'mongodb://ToDoAppReadWriteUser:';
+mongooseConnectionString += mongoPassword;
+mongooseConnectionString += '@100.34.18.126:65503/todoapp?authsource=admin'
+
+console.log(mongooseConnectionString);
+
+mongoose.connect(mongooseConnectionString, {useNewUrlParser: true})
+.then(() => { console.log('Success! Connected to Mongo Database at + ' + mongooseConnectionString)})
+.catch(() => { console.log('Error Connecting to Mongo Database at + ' + mongooseConnectionString)});
 
 
 
