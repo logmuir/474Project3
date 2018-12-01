@@ -19,7 +19,7 @@ export class ItineraryComponent implements OnInit {
   public newItinerary: Itinerary = new Itinerary()
 
   //An Empty list for the visible itinerary list
-  itinerarysList: Itinerary[];
+  existingItinerarys: Itinerary[];
   editItinerarys: Itinerary[] = [];
 
   private currentUserEmail: string;
@@ -27,13 +27,13 @@ export class ItineraryComponent implements OnInit {
   create() {
     this.itineraryService.createItinerary(this.newItinerary)
       .subscribe((res) => {
-        this.itinerarysList.push(res.data)
+        this.existingItinerarys.push(res.data)
         this.newItinerary = new Itinerary()
       })
   }
 
   editItinerary(itinerary: Itinerary) {
-    if (this.itinerarysList.includes(itinerary)) {
+    if (this.existingItinerarys.includes(itinerary)) {
       if (!this.editItinerarys.includes(itinerary)) {
         this.editItinerarys.push(itinerary)
       } else {
@@ -66,7 +66,7 @@ export class ItineraryComponent implements OnInit {
 
   deleteItinerary(itinerary: Itinerary) {
     this.itineraryService.deleteItinerary(itinerary._id).subscribe(res => {
-      this.itinerarysList.splice(this.itinerarysList.indexOf(itinerary), 1);
+      this.existingItinerarys.splice(this.existingItinerarys.indexOf(itinerary), 1);
     })
   }
 
@@ -74,7 +74,7 @@ export class ItineraryComponent implements OnInit {
     this.currentUserEmail = 'test@gmail.com';
     this.itineraryService.getItinerarys(this.currentUserEmail)
       .subscribe(itinerarys => {
-        this.itinerarysList = itinerarys
+        this.existingItinerarys = itinerarys
       })
   }
 }
