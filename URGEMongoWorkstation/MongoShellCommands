@@ -1,1 +1,3 @@
-mongodb://ToDoAppReadWriteUser:PASSWORD@100.34.18.126:65503/todoapp?authsource=admin
+mongo "mongodb://ToDoAppReadWriteUser:PASSWORD@100.34.18.126:65503/todoapp?authsource=admin"
+
+mongo --username ToDoAppReadWriteUser --password <password> --authenticationDatabase admin --host 100.34.18.126 --port 65503
