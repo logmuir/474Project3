@@ -70,10 +70,8 @@ export class ItineraryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //At component initialization the 
     this.itineraryService.getItinerarys()
       .subscribe(itinerarys => {
-        //assign the itinerarylist property to the proper http response
         this.itinerarysList = itinerarys
         console.log(itinerarys)
       })
