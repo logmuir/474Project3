@@ -72,6 +72,7 @@ export class ItineraryComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUserEmail = 'test@gmail.com';
+    // this.currentUserEmail = 'anotherTest@gmail.com';
     this.itineraryService.getItinerarys(this.currentUserEmail)
       .subscribe(itinerarys => {
         this.existingItinerarys = itinerarys
