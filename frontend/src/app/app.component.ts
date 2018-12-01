@@ -1,5 +1,3 @@
-import { Response } from '@angular/http';
-import { ItineraryService } from './Itinerary/services/itinerary.service';
 import Itinerary from './Itinerary/models/itinerary.model';
 import { Component, OnInit } from '@angular/core';
 
