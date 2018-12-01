@@ -13,16 +13,6 @@ export class AppComponent implements OnInit {
   constructor(
   ) { }
 
-  //Declaring the new itinerary Object and initilizing it
-  public newItinerary: Itinerary = new Itinerary()
-
-  //An Empty list for the visible itinerary list
-  itinerarysList: Itinerary[];
-  editItinerarys: Itinerary[] = [];
-
-
-  create() {
-  }
   
   ngOnInit(): void {
   }
