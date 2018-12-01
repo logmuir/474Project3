@@ -1,4 +1,3 @@
-import Itinerary from './Itinerary/models/itinerary.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -13,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(
   ) { }
 
-  
+
   ngOnInit(): void {
   }
 }
