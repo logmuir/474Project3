@@ -1,7 +1,7 @@
 import Itinerary from '../models/itinerary.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Response } from '@angular/http';
 import { Injectable } from '@angular/core';
 
@@ -24,12 +24,11 @@ export class ItineraryService {
     return this.http.post(`${this.itineraryUrl}`, itinerary);
   }
 
-  //Read itinerary, takes no arguments
   getItinerarys(): Observable<Itinerary[]> {
-    return this.http.get(this.itineraryUrl)
+    let params = new HttpParams();
+    params = params.append("targetEmail", "test@gmail.com")
+    return this.http.get(this.itineraryUrl, {params: params})
       .pipe(map(res => {
-        //Maps the response object sent from the server
-
         return res["data"].docs as Itinerary[];
       }))
   }

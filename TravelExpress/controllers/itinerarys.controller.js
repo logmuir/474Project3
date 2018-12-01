@@ -13,6 +13,8 @@ exports.getItinerarys = async function (req, res, next) {
 
     // Check the existence of the query parameters, If the exists doesn't exists assign a default value
 
+    console.log(req.query.targetEmail);
+
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
 
@@ -60,6 +62,8 @@ exports.createItinerary = async function (req, res, next) {
 exports.updateItinerary = async function (req, res, next) {
 
     // Id is necessary for the update
+
+    console.log(req);
 
     if (!req.body._id) {
         return res.status(400).json({ status: 400., message: "Id must be present" })
