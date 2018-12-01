@@ -3,6 +3,7 @@ var mongoosePaginate = require('mongoose-paginate')
 
 
 var ItinerarySchema = new mongoose.Schema({
+    ownerEmail: String,
     title: String,
     description: String,
     date: Date,

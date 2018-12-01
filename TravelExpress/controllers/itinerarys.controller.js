@@ -13,14 +13,14 @@ exports.getItinerarys = async function (req, res, next) {
 
     // Check the existence of the query parameters, If the exists doesn't exists assign a default value
 
-    console.log(req.query.targetEmail);
+    console.log(req.query);
 
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
 
     try {
 
-        var itinerarys = await ItineraryService.getItinerarys({}, page, limit)
+        var itinerarys = await ItineraryService.getItinerarys(req.query, page, limit)
 
         // Return the itinerarys list with the appropriate HTTP Status Code and Message.
 

@@ -18,7 +18,6 @@ exports.getItinerarys = async function (query, page, limit) {
     }
 
     // Try Catch the awaited promise to handle the error 
-
     try {
         var itinerarys = await Itinerary.paginate(query, options)
 
