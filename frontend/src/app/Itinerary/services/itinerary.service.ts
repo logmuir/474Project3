@@ -27,12 +27,14 @@ export class ItineraryService {
   getItinerarys(targetOwnerEmail): Observable<Itinerary[]> {
     console.log("Target Email: " + targetOwnerEmail);
     let params = new HttpParams();
+    
     params = params.append("ownerEmail", targetOwnerEmail)
     return this.http.get(this.itineraryUrl, {params: params})
       .pipe(map(res => {
         return res["data"].docs as Itinerary[];
       }))
   }
+  
   //Update itinerary, takes a Itinerary Object as parameter
   editItinerary(itinerary: Itinerary) {
     let editUrl = `${this.itineraryUrl}`

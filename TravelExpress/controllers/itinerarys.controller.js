@@ -91,7 +91,7 @@ exports.removeItinerary = async function (req, res, next) {
 
     try {
         var deleted = await ItineraryService.deleteItinerary(id)
-        return res.status(204).json({ status: 204, message: "Succesfully Itinerary Deleted" })
+        return res.status(204).json({ status: 204, message: "Itinerary successfully deleted" })
     } catch (e) {
         return res.status(400).json({ status: 400, message: e.message })
     }
