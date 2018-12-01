@@ -25,7 +25,7 @@ export class ItineraryService {
   }
 
   getItinerarys(targetEmail): Observable<Itinerary[]> {
-    console.log("Target " + targetEmail);
+    console.log("Target Email: " + targetEmail);
     let params = new HttpParams();
     params = params.append("targetEmail", targetEmail)
     return this.http.get(this.itineraryUrl, {params: params})
