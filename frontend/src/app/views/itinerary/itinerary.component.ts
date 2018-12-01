@@ -33,7 +33,6 @@ export class ItineraryComponent implements OnInit {
   }
 
   editItinerary(itinerary: Itinerary) {
-    console.log(itinerary)
     if (this.itinerarysList.includes(itinerary)) {
       if (!this.editItinerarys.includes(itinerary)) {
         this.editItinerarys.push(itinerary)
@@ -76,7 +75,6 @@ export class ItineraryComponent implements OnInit {
     this.itineraryService.getItinerarys(this.currentUserEmail)
       .subscribe(itinerarys => {
         this.itinerarysList = itinerarys
-        console.log(itinerarys)
       })
   }
 }

@@ -63,15 +63,12 @@ exports.updateItinerary = async function (req, res, next) {
 
     // Id is necessary for the update
 
-    console.log(req);
 
     if (!req.body._id) {
         return res.status(400).json({ status: 400., message: "Id must be present" })
     }
 
     var id = req.body._id;
-
-    console.log(req.body)
 
     var itinerary = {
         id,
