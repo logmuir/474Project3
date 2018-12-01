@@ -22,6 +22,8 @@ export class ItineraryComponent implements OnInit {
   itinerarysList: Itinerary[];
   editItinerarys: Itinerary[] = [];
 
+  private currentUserEmail: string;
+
   create() {
     this.itineraryService.createItinerary(this.newItinerary)
       .subscribe((res) => {
@@ -70,11 +72,11 @@ export class ItineraryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.itineraryService.getItinerarys()
+    this.currentUserEmail = 'test@gmail.com';
+    this.itineraryService.getItinerarys(this.currentUserEmail)
       .subscribe(itinerarys => {
         this.itinerarysList = itinerarys
         console.log(itinerarys)
       })
   }
-
 }

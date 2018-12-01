@@ -24,9 +24,10 @@ export class ItineraryService {
     return this.http.post(`${this.itineraryUrl}`, itinerary);
   }
 
-  getItinerarys(): Observable<Itinerary[]> {
+  getItinerarys(targetEmail): Observable<Itinerary[]> {
+    console.log("Target " + targetEmail);
     let params = new HttpParams();
-    params = params.append("targetEmail", "test@gmail.com")
+    params = params.append("targetEmail", targetEmail)
     return this.http.get(this.itineraryUrl, {params: params})
       .pipe(map(res => {
         return res["data"].docs as Itinerary[];
