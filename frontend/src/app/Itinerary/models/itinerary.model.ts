@@ -6,7 +6,7 @@ class Itinerary {
     description: string;
     date: Date;
     status: string;
-    tripEvents: TripEvent[]
+    tripEvents: TripEvent[];
 
     constructor(
     ) {

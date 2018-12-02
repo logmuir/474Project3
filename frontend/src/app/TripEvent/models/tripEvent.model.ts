@@ -4,8 +4,7 @@ class TripEvent {
     address: string;
     date: Date;
     status: string;
-    order: number;
-    
+    order: number;    
 
     constructor(
     ) {
