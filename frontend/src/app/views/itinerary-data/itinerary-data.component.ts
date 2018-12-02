@@ -12,11 +12,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   providers: [FoursquareService]
 })
 export class ItineraryDataComponent implements OnInit {
-  form: FormGroup;
+  //form: FormGroup;
+  public displayMessage = "Categories";
+  public sortOptions = ["*", "Drinks", "Coffee", "Shops", "Arts", "Outdoors", "Sights", "Trending", "Top Picks"]
   public show:boolean = false;
   public buttonName:any = 'Show';
   events:any = null;
   place: string = null;
+  category: string = null;
 
   p: number = 1;
   
@@ -35,7 +38,7 @@ export class ItineraryDataComponent implements OnInit {
 
   getEvents() {
     this.foursquareService
-    .getAllNear(this.place)
+    .getAllNear(this.place, this.category)
       .subscribe(events => {
         console.log(events);
         this.events = events;
@@ -47,6 +50,13 @@ export class ItineraryDataComponent implements OnInit {
     this.show = true;
     this.getEvents();
     console.log(stringToSearchFor)
+  }
+
+  onDropDownSelect(categoryToSearchFor: string){
+    this.displayMessage = categoryToSearchFor;
+    this.category = categoryToSearchFor;
+    console.log(this.displayMessage);
+    return this.displayMessage;
   }
 
 }

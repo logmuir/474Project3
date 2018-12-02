@@ -8,6 +8,19 @@
                     <div id="imaginary_container">
                         <div class="input-group stylish-input-group">
                             <input #wordToSearchFor type="text" class="form-control" placeholder="Enter a city, state...">
+                            <!-- <ngbd-dropdown-basic></ngbd-dropdown-basic> -->
+                            <div class="row">
+                                    <div class="col">
+                                        <div ngbDropdown class="d-inline-block">
+                                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ displayMessage }}</button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                                <div *ngFor="let option of sortOptions">
+                                                    <button class="dropdown-item" id="option" on-click="onDropDownSelect(option)">{{option}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
                             <button (click)="onButtonClick(wordToSearchFor.value)">
                                 <span class="glyphicon glyphicon-search">Submit</span>
                             </button>
@@ -16,7 +29,6 @@
                 </div>
             </div>
         </div>
-        <ngbd-dropdown-basic></ngbd-dropdown-basic>
                       
         <ng-container *ngIf="show">
             <div class="table-responsive" *ngIf='events'>

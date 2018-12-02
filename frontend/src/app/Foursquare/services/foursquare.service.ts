@@ -12,6 +12,7 @@ import { map } from 'rxjs/operators';
   })
   export class FoursquareService {
     baseUri: string;
+    category: string = null;
     private headers = new Headers({
       'Content-Type': 'application/json'
     });
@@ -22,9 +23,22 @@ import { map } from 'rxjs/operators';
       this.extra = '&client_id=BEYZLUHIFTJIUFIZ1C5FYY5RCC0ULGFECYLK3GTKSNRP35HF&client_secret=NBYG53A5OFA0NKTYZE4SLLWBICTMWWSNZFSBWYYAL21QAFO1&v=20160201&m=foursquare';
     }
 
-    getAllNear(place : string): Observable<Array<any>>{
-      const url = this.baseUri + '?near=' + place + this.extra;
-      return this.http.get<any[]>(url).pipe(map(data => data));
+    // onDropDownSelect(categoryToSelect: string){
+    //   console.log(this.ngbdb.changeMessage(categoryToSelect));
+    //   console.log(this.category);
+    // }
+
+    getAllNear(place : string, category : string): Observable<Array<any>>{
+      if (this.category === "*"){
+        const url = this.baseUri + '?near=' + place + this.extra;
+        console.log(url);
+        return this.http.get<any[]>(url).pipe(map(data => data));
+      }
+      else{
+        const url = this.baseUri + '?near=' + place + '&section=' + category + this.extra;
+        console.log(url);
+        return this.http.get<any[]>(url).pipe(map(data => data));
+      }
     }
 } 
 
