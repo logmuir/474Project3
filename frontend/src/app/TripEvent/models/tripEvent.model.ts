@@ -1,14 +1,16 @@
 class TripEvent {
     _id: string;
     title: string;
-    description: string;
+    address: string;
     date: Date;
     status: string;
+    order: number;
+    
 
     constructor(
     ) {
         this.title = ""
-        this.description = ""
+        this.address = ""
         this.date = new Date()
         this.status = ""
     }
