@@ -14,6 +14,7 @@ class Itinerary {
         this.description = ""
         this.date = new Date()
         this.status = ""
+        this.tripEvents = []
     }
 }
 
