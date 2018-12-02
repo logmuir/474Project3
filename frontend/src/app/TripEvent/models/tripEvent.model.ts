@@ -1,12 +1,9 @@
-import TripEvent from "src/app/TripEvent/models/tripEvent.model";
-
-class Itinerary {
+class TripEvent {
     _id: string;
     title: string;
     description: string;
     date: Date;
     status: string;
-    tripEvents: TripEvent[]
 
     constructor(
     ) {
@@ -17,4 +14,4 @@ class Itinerary {
     }
 }
 
-export default Itinerary;
+export default TripEvent;
