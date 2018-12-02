@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ItineraryService } from './Itinerary/services/itinerary.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +12,12 @@ import { ItineraryDataComponent } from './views/itinerary-data/itinerary-data.co
 import { HomeComponent } from './views/home/home.component';
 import { FoursquareService } from './Foursquare/services/foursquare.service';
 import { ItineraryComponent } from './views/itinerary/itinerary.component';
+<<<<<<< HEAD
 import { TripEventComponent } from './views/trip-event/trip-event.component';
+=======
+import { NgDragDropModule } from 'ng-drag-drop';
+import 'hammerjs';
+>>>>>>> d261aafecd9603295d6da22fc66f129944b2179d
 
 @NgModule({
   declarations: [
@@ -27,7 +32,9 @@ import { TripEventComponent } from './views/trip-event/trip-event.component';
     HttpClientModule,
     FormsModule,
     NgbModule.forRoot(),
-    AppRoutingModule
+    NgDragDropModule.forRoot(),
+    AppRoutingModule,
+    ReactiveFormsModule
   ],
   providers: [
     ItineraryService, FoursquareService

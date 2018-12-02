@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ItineraryDataComponent } from './itinerary-data.component';
 
 describe('ItineraryDataComponent', () => {

@@ -1,25 +1,68 @@
-<h1>
-  itinerary-data works!
-</h1>
- <ng-container>
-  <div class="table-responsive">
-      <table class="table table-hover">
-          <thead>
-              <tr>
-                  <th>Response</th>
-                  <th>Address</th>
-                  <th>Distance</th>
-                  <th>Category</th>
-              </tr>
-          </thead>
-          <ng-template ngFor let-group [ngForOf]='events.response.groups'>
-          <tr *ngFor="let event of group.items">
-              <td> {{ event.venue.name }}</td>
-              <td> {{ event.venue.location.address }} </td>
-              <td> {{ event.venue.categories }}</td>
-              <td> {{ event.venue.categories.name }}</td>
-          </tr>
-        </ng-template>
-      </table>
-  </div>
-</ng-container>
+<body ng-app="tablePlunker" style="margin: 10px;">
+    <h4 class="text-primary">Welcome, to build your itinerary, please enter a city,state in the search bar. Then, after clicking search, select the items wou would like to add to your itinerary!</h4>
+    <div ng-controller="GridController">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-3">
+                    <div id="imaginary_container">
+                        <div class="input-group stylish-input-group">
+                            <input #wordToSearchFor type="text" class="form-control" placeholder="Enter a city, state...">
+                            <div class="row">
+                                    <div class="col">
+                                        <div ngbDropdown class="d-inline-block">
+                                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ displayMessage }}</button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                                <div *ngFor="let option of sortOptions">
+                                                    <button class="dropdown-item" id="option" on-click="onDropDownSelect(option)">{{option}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                            <button (click)="onButtonClick(wordToSearchFor.value)">
+                                <span class="glyphicon glyphicon-search">Submit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="column">
+        <ng-container *ngIf="show">
+            <div class="table-responsive" *ngIf='events'>
+            <table ng-table="tableParams" class="table ng-table-rowselected table-hover table-condensed table-striped table-responsive" show-filter="true" template-pagination="pager" export-csv="csv">
+                <thead>
+                    <tr>
+                        <!-- <th>Add to Itinerary?</th> -->
+                        <th>Place</th>
+                        <th>Address</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <ng-template ngFor let-group [ngForOf]='events.response.groups'>
+                <tr draggable *ngFor="let event of group.items; let i=index;">
+                    <td data-title="'Place'" draggable="true" [dragData]="event.venue.name">{{ event.venue.name }}</td>
+                    <td data-title="'Address'" draggable="true" [dragData]="event.venue.location.address">{{ event.venue.location.address }} </td>
+                    <td data-title="'Category'" draggable="true" *ngFor="let category of event.venue.categories">
+                        {{ category.name }}
+                    </td>    
+                </tr>
+                </ng-template>
+                <!-- <form [formGroup]="form" (ngSubmit)="submit()"> -->
+                    <!-- our form array of checkboxes will go here -->
+                    <!-- <button>submit</button> -->
+                <!-- </form> -->
+                </table>
+            </div>
+        </ng-container>
+    </div>
+    <div class="column" droppable (onDrop)="onItemDrop($event)">
+        <p>Drop items here</p>
+        <div class="panel-body">
+                <li *ngFor="let event of droppedItems" class="list-group-item">{{event}}</li>
+        </div>
+    </div> 
+</div>
+</body>
