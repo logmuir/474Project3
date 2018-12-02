@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FoursquareService } from '../../Foursquare/services/foursquare.service';
+import { MatTableDataSource } from '@angular/material';
 import 'rxjs/Rx';
-import { isArray } from 'util';
+import { toArray } from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-itinerary-data',
@@ -10,14 +12,22 @@ import { isArray } from 'util';
   providers: [FoursquareService]
 })
 export class ItineraryDataComponent implements OnInit {
-  //public show:boolean = false;
-  //public buttonName:any = 'Show';
-  events:any[] = [];
-  place: string = 'newark,de';
+  form: FormGroup;
+  public show:boolean = false;
+  public buttonName:any = 'Show';
+  events:any = null;
+  place: string = null;
 
   p: number = 1;
   
-  constructor(private foursquareService: FoursquareService) { }
+  constructor(private foursquareService: FoursquareService) {
+    // Create a new array with a form control for each order
+    //const controls = this.orders.map(c => new FormControl(false));
+    //controls[0].setValue(true); // Set the first checkbox to true (checked)
+    // this.form = this.formBuilder.group({
+    //   orders: []
+    // });
+  }
 
   ngOnInit() {
     this.getEvents();
@@ -32,15 +42,12 @@ export class ItineraryDataComponent implements OnInit {
       });
   }
 
-  //onSelect(foursquare: Foursquare): void{
-  //}
-
-  //onButtonClick(stringToSearchFor: string): void {
-    //this.place = stringToSearchFor;
-    //this.show = true;
-    //this.getEvents();
-    //console.log(stringToSearchFor)
-  //}
+  onButtonClick(stringToSearchFor: string): void {
+    this.place = stringToSearchFor;
+    this.show = true;
+    this.getEvents();
+    console.log(stringToSearchFor)
+  }
 
 }
 

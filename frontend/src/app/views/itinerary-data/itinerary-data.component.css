@@ -1,3 +1,14 @@
+/* Styles go here */
+
+.ng-table tr.emphasis td {
+    background-color: #DDD;
+    font-weight: bold;
+}
+
+.ng-table-rowselected tr {
+    cursor: pointer;
+}
+
 .stylish-input-group .input-group-addon{
     background: white !important; 
 }

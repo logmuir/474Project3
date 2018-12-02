@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col">
+        <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{ displayMessage }}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <div *ngFor="let option of sortOptions">
+                    <button class="dropdown-item" id="option" on-click="changeMessage(option)">{{option}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

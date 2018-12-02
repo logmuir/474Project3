@@ -12,20 +12,32 @@ import { ItineraryDataComponent } from './views/itinerary-data/itinerary-data.co
 import { HomeComponent } from './views/home/home.component';
 import { FoursquareService } from './Foursquare/services/foursquare.service';
 import { ItineraryComponent } from './views/itinerary/itinerary.component';
+import 'hammerjs';
+
+import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
+  MatSortModule, MatTableModule } from "@angular/material";
+
+import {NgbdDropdownBasic} from "./views/itinerary-data/dropdown-basic"
 
 @NgModule({
   declarations: [
     AppComponent,
     ItineraryDataComponent,
     HomeComponent,
-    ItineraryComponent
+    ItineraryComponent,
+    NgbdDropdownBasic
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     NgbModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     ItineraryService, FoursquareService
