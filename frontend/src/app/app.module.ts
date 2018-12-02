@@ -1,4 +1,4 @@
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ItineraryService } from './Itinerary/services/itinerary.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +12,19 @@ import { ItineraryDataComponent } from './views/itinerary-data/itinerary-data.co
 import { HomeComponent } from './views/home/home.component';
 import { FoursquareService } from './Foursquare/services/foursquare.service';
 import { ItineraryComponent } from './views/itinerary/itinerary.component';
+//import { MatCheckboxModule } from '@angular/material';
+// import {
+//   MatButtonModule,
+//   MatToolbarModule,
+//   MatIconModule,
+//   MatCardModule,
+//   MatCheckboxModule,
+//   MatRadioModule,
+//   MAT_CHECKBOX_CLICK_ACTION,
+//   MatListModule,
+//   } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//import { MdCheckboxModule } from '@angular/material';
 import 'hammerjs';
 
 @NgModule({
@@ -19,14 +32,16 @@ import 'hammerjs';
     AppComponent,
     ItineraryDataComponent,
     HomeComponent,
-    ItineraryComponent,
+    ItineraryComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     NgbModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    //MdCheckboxModule,
+    ReactiveFormsModule
   ],
   providers: [
     ItineraryService, FoursquareService

@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FoursquareService } from '../../Foursquare/services/foursquare.service';
-import { MatTableDataSource } from '@angular/material';
 import 'rxjs/Rx';
-import { toArray } from 'rxjs/operators';
-import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-itinerary-data',
@@ -12,25 +9,19 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   providers: [FoursquareService]
 })
 export class ItineraryDataComponent implements OnInit {
-  //form: FormGroup;
   public displayMessage = "Categories";
   public sortOptions = ["*", "Drinks", "Coffee", "Shops", "Arts", "Outdoors", "Sights", "Trending", "Top Picks"]
   public show:boolean = false;
   public buttonName:any = 'Show';
+  lastAction: string;
   events:any = null;
   place: string = null;
   category: string = null;
+  itinerary_items: Object[] = null;
 
   p: number = 1;
   
-  constructor(private foursquareService: FoursquareService) {
-    // Create a new array with a form control for each order
-    //const controls = this.orders.map(c => new FormControl(false));
-    //controls[0].setValue(true); // Set the first checkbox to true (checked)
-    // this.form = this.formBuilder.group({
-    //   orders: []
-    // });
-  }
+  constructor(private foursquareService: FoursquareService) {}
 
   ngOnInit() {
     this.getEvents();
@@ -58,6 +49,22 @@ export class ItineraryDataComponent implements OnInit {
     console.log(this.displayMessage);
     return this.displayMessage;
   }
+
+  // onCheckBoxSelect(placeSelection: Object){
+  //   console.log(placeSelection);
+  //   this.itinerary_items.push(placeSelection);
+  //   console.log(this.itinerary_items);
+  // }
+
+  onChange(event, index, item) {
+
+    item.checked = !item.checked;
+
+    this.lastAction = 'index: ' + index + ', label: ' + item.label + ', checked: ' + item.checked;
+
+    console.log(index, event, item);
+
+}
 
 }
 
