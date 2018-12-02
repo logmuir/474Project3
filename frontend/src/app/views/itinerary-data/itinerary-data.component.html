@@ -8,7 +8,6 @@
                     <div id="imaginary_container">
                         <div class="input-group stylish-input-group">
                             <input #wordToSearchFor type="text" class="form-control" placeholder="Enter a city, state...">
-                            <!-- <ngbd-dropdown-basic></ngbd-dropdown-basic> -->
                             <div class="row">
                                     <div class="col">
                                         <div ngbDropdown class="d-inline-block">
@@ -29,26 +28,24 @@
                 </div>
             </div>
         </div>
-                      
+        
+        <div class="column">
         <ng-container *ngIf="show">
             <div class="table-responsive" *ngIf='events'>
             <table ng-table="tableParams" class="table ng-table-rowselected table-hover table-condensed table-striped table-responsive" show-filter="true" template-pagination="pager" export-csv="csv">
                 <thead>
                     <tr>
-                        <th>Add to Itinerary?</th>
+                        <!-- <th>Add to Itinerary?</th> -->
                         <th>Place</th>
                         <th>Address</th>
                         <th>Category</th>
                     </tr>
                 </thead>
                 <ng-template ngFor let-group [ngForOf]='events.response.groups'>
-                <tr *ngFor="let event of group.items; let i=index;">
-                  <td width="30" style="text-align: left">
-                      <input type="checkbox"/>
-                  </td>
-                 <td data-title="'Place'" sortable="place" filter="{ 'place': 'select' }" filter-data="places($column)">{{ event.venue.name }}</td>
-                  <td data-title="'Address'" sortable="address" filter="{ 'address': 'address' }">{{ event.venue.location.address }} </td>
-                  <td data-title="'Category'" sortable="category" filter="{'category: 'category'}" *ngFor="let category of event.venue.categories">
+                <tr draggable *ngFor="let event of group.items; let i=index;">
+                    <td data-title="'Place'" draggable="true" [dragData]="event.venue.name">{{ event.venue.name }}</td>
+                    <td data-title="'Address'" draggable="true" [dragData]="event.venue.location.address">{{ event.venue.location.address }} </td>
+                    <td data-title="'Category'" draggable="true" *ngFor="let category of event.venue.categories">
                         {{ category.name }}
                     </td>    
                 </tr>
@@ -61,4 +58,11 @@
             </div>
         </ng-container>
     </div>
+    <div class="column" droppable (onDrop)="onItemDrop($event)">
+        <p>Drop items here</p>
+        <div class="panel-body">
+                <li *ngFor="let event of droppedItems" class="list-group-item">{{event}}</li>
+        </div>
+    </div> 
+</div>
 </body>

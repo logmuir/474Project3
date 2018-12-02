@@ -17,7 +17,8 @@ export class ItineraryDataComponent implements OnInit {
   events:any = null;
   place: string = null;
   category: string = null;
-  itinerary_items: Object[] = null;
+  droppedItems: Object[] = [];
+
 
   p: number = 1;
   
@@ -50,21 +51,30 @@ export class ItineraryDataComponent implements OnInit {
     return this.displayMessage;
   }
 
+  // isDropAllowed = (dragData: any) => {
+  //   // Resolves to true or false after 1 second
+  //   return Observable.of(dragData > this.val).delay(1000);
+  // }
+
   // onCheckBoxSelect(placeSelection: Object){
   //   console.log(placeSelection);
   //   this.itinerary_items.push(placeSelection);
   //   console.log(this.itinerary_items);
   // }
 
-  onChange(event, index, item) {
+  // onChange(event, index, item) {
+  //   item.checked = !item.checked;
+  //   this.lastAction = 'index: ' + index + ', label: ' + item.label + ', checked: ' + item.checked;
+  //   console.log(index, event, item);
+  // }
 
-    item.checked = !item.checked;
-
-    this.lastAction = 'index: ' + index + ', label: ' + item.label + ', checked: ' + item.checked;
-
-    console.log(index, event, item);
-
-}
+  onItemDrop(e: any) {
+    // Get the dropped data here
+    console.log(e);
+    console.log(e.dragData);
+    this.droppedItems.push(e.dragData);
+    console.log(this.droppedItems);
+  }
 
 }
 

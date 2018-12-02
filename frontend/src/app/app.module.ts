@@ -12,19 +12,7 @@ import { ItineraryDataComponent } from './views/itinerary-data/itinerary-data.co
 import { HomeComponent } from './views/home/home.component';
 import { FoursquareService } from './Foursquare/services/foursquare.service';
 import { ItineraryComponent } from './views/itinerary/itinerary.component';
-//import { MatCheckboxModule } from '@angular/material';
-// import {
-//   MatButtonModule,
-//   MatToolbarModule,
-//   MatIconModule,
-//   MatCardModule,
-//   MatCheckboxModule,
-//   MatRadioModule,
-//   MAT_CHECKBOX_CLICK_ACTION,
-//   MatListModule,
-//   } from '@angular/material';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-//import { MdCheckboxModule } from '@angular/material';
+import { NgDragDropModule } from 'ng-drag-drop';
 import 'hammerjs';
 
 @NgModule({
@@ -39,8 +27,8 @@ import 'hammerjs';
     HttpClientModule,
     FormsModule,
     NgbModule.forRoot(),
+    NgDragDropModule.forRoot(),
     AppRoutingModule,
-    //MdCheckboxModule,
     ReactiveFormsModule
   ],
   providers: [
