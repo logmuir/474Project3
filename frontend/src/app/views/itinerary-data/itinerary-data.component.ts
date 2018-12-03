@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FoursquareService } from '../../Foursquare/services/foursquare.service';
 import 'rxjs/Rx';
+import { TripEvent } from './../../TripEvent/models/tripEvent.model';
 
 @Component({
   selector: 'app-itinerary-data',
@@ -9,6 +10,9 @@ import 'rxjs/Rx';
   providers: [FoursquareService]
 })
 export class ItineraryDataComponent implements OnInit {
+  public selectedEvent;
+  tripEvent: TripEvent = null;
+  all_tripEvents: TripEvent[] = [];
   public displayMessage = "Categories";
   public sortOptions = ["*", "Drinks", "Coffee", "Shops", "Arts", "Outdoors", "Sights", "Trending", "Top Picks"]
   public show:boolean = false;
@@ -18,15 +22,10 @@ export class ItineraryDataComponent implements OnInit {
   place: string = null;
   category: string = null;
   droppedItems: Object[] = [];
-
-
-  p: number = 1;
   
   constructor(private foursquareService: FoursquareService) {}
 
-  ngOnInit() {
-    this.getEvents();
-  }
+  ngOnInit() {}
 
   getEvents() {
     this.foursquareService
@@ -35,6 +34,10 @@ export class ItineraryDataComponent implements OnInit {
         console.log(events);
         this.events = events;
       });
+  }
+
+  getId(){
+    //this.foursquareService.
   }
 
   onButtonClick(stringToSearchFor: string): void {
@@ -51,30 +54,61 @@ export class ItineraryDataComponent implements OnInit {
     return this.displayMessage;
   }
 
-  // isDropAllowed = (dragData: any) => {
-  //   // Resolves to true or false after 1 second
-  //   return Observable.of(dragData > this.val).delay(1000);
+  drop(ev) {
+    console.log(ev);
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+  }
+
+  allowDrop(ev) {
+    console.log(ev);
+    ev.preventDefault();
+  }
+
+  drag(ev) {
+    console.log(ev);
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
+
+  // RowSelected(event:any){
+  //   this.selectedEvent = event;   // declare variable in component.
+  //   console.log(this.selectedEvent);
   // }
 
-  // onCheckBoxSelect(placeSelection: Object){
-  //   console.log(placeSelection);
-  //   this.itinerary_items.push(placeSelection);
-  //   console.log(this.itinerary_items);
-  // }
-
-  // onChange(event, index, item) {
-  //   item.checked = !item.checked;
-  //   this.lastAction = 'index: ' + index + ', label: ' + item.label + ', checked: ' + item.checked;
-  //   console.log(index, event, item);
+  // onRowSelect(e: any){
+  //   console.log(e);
+  //   //this.selectedEvent = event;
+  //   //console.log(e);
   // }
 
   onItemDrop(e: any) {
     // Get the dropped data here
-    console.log(e);
-    console.log(e.dragData);
     this.droppedItems.push(e.dragData);
+
+    // var remove_index = this.events.indexOf(e.dragData);
+    //  if(remove_index > -1){
+    //    this.events.splice(remove_index, 1);
+    //  }
+
+    //this.tripEvent = new TripEvent(e.dragData);
+    //this.all_tripEvents.push(this.tripEvent);
     console.log(this.droppedItems);
+    //console.log(this.all_tripEvents);
   }
+
+  // onItemDelete(e: any){
+  //    var remove_index = this.droppedItems.indexOf(e.dragData);
+  //    if(remove_index > -1){
+  //      this.droppedItems.splice(remove_index, 1);
+  //    }
+  //    console.log(this.droppedItems);
+  //   //  var remove_index = this.all_tripEvents.indexOf(e.dragData);
+  //   //  if(remove_index > -1){
+  //   //    this.all_tripEvents.splice(remove_index, 1);
+  //   //  }
+  //   //  console.log(this.all_tripEvents);
+  // }
 
 }
 

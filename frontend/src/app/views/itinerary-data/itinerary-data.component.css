@@ -6,11 +6,12 @@
 /* Clear floats after the columns */
 .row:after {
     content: "";
-    display: table;
+    display: table; 
     clear: both;
 }
 
 .ng-table tr.emphasis td {
+    background: #DDD;
     background-color: #DDD;
     font-weight: bold;
 }
