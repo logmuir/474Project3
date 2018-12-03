@@ -1,47 +1,29 @@
-<table class="table">
-  <thead class="h">
-    <tr class="h">
-      <th class="h">Title</th>
-      <th class="h">Description</th>
-      <th class="h">Date</th>
-      <th class="h">Status</th>
-      <th class="h">Options</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="itinerary" (dblclick)="editItinerary(itinerary)" *ngFor="let itinerary of itinerarysList">
-
-      <ng-container *ngIf="!editItinerarys.includes(itinerary); else editTD">
-        <td>{{itinerary.title}}</td>
-        <td>{{itinerary.description}}</td>
-        <td>{{itinerary.date | date}}</td>
-        <td>{{itinerary.status}}</td>
-      </ng-container>
-
-      <ng-template #editTD>
-        <td><input type="text" name="title" id="title" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.title"
-            placeholder="Title" class="form-control"></td>
-        <td><input type="text" name="description" id="description" (keypress)="submitItinerary($event, itinerary)"
-            [(ngModel)]="itinerary.description" placeholder="Description" class="form-control"></td>
-        <td>{{itinerary.date | date}}</td>
-        <td>
-          <input type="text" name="status" id="status" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.status"
-            placeholder="Status" class="form-control">
-        </td>
-      </ng-template>
-
-      <td class="o">
-        <button class="btn btn-success" (click)="doneItinerary(itinerary)">
-          <i class="fa fa-check"></i>
+<header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" navbar-light>Travel Express</a>
+        <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed" data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
         </button>
-        <button class="btn btn-primary" (click)="editItinerary(itinerary)">
-          <i class="fa fa-pencil"></i>
-        </button>
-        <button class="btn btn-danger" (click)="deleteItinerary(itinerary)">
-          <i class="fa fa-trash"></i>
-        </button>
-      </td>
-
-    </tr>
-  </tbody>
-</table>
+        
+        <div [ngbCollapse]="!isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" routerLink="home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="about">About</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="myItineraries">My Itineraries</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="build">Build an Itinerary</a></li>
+                <li class="nav-item"><a class="nav-link" routerLink="courses">Contact Us</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+</header>
+<div>
+        <router-outlet></router-outlet>
+      </div>
+  <!-- Page Content -->
+  <!-- <section class="py-5">
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+  </section> -->
