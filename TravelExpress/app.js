@@ -20,23 +20,18 @@ var mongooseConnectionString = 'mongodb://ToDoAppReadWriteUser:';
 mongooseConnectionString += mongoPassword;
 mongooseConnectionString += '@100.34.18.126:65503/todoapp?authsource=admin'
 
-console.log(mongooseConnectionString);
-
-mongoose.connect(mongooseConnectionString, {useNewUrlParser: true})
-.then(() => { console.log('Success! Connected to Mongo Database at + ' + mongooseConnectionString)})
-.catch(() => { console.log('Error Connecting to Mongo Database at + ' + mongooseConnectionString)});
-
-
+mongoose.connect(mongooseConnectionString, { useNewUrlParser: true })
+  .then(() => { console.log('Success! Connected to Mongo Database at + ' + mongooseConnectionString) })
+  .catch(() => { console.log('Error Connecting to Mongo Database at + ' + mongooseConnectionString) });
 
 var app = express();
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:4200");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
-
 
 
 // view engine setup

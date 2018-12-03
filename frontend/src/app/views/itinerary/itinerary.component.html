@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr class="itinerary" (dblclick)="editItinerary(itinerary)" *ngFor="let itinerary of itinerarysList">
+    <tr class="itinerary" (dblclick)="editItinerary(itinerary)" *ngFor="let itinerary of existingItinerarys">
 
       <ng-container *ngIf="!editItinerarys.includes(itinerary); else editTD">
         <td>{{itinerary.title}}</td>

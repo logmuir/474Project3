@@ -1,11 +1,34 @@
+.column {
+    float: left;
+    width: 50%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.ng-table tr.emphasis td {
+    background-color: #DDD;
+    font-weight: bold;
+}
+
+.ng-table-rowselected tr {
+    cursor: pointer;
+}
+
 .stylish-input-group .input-group-addon{
     background: white !important; 
 }
+
 .stylish-input-group .form-control{
 	border-right:0; 
 	box-shadow:0 0 0; 
 	border-color:#ccc;
 }
+
 .stylish-input-group button{
     border:4;
     background:transparent;
