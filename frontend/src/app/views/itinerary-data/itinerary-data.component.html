@@ -60,12 +60,8 @@
         <p>Drop items here</p>
         <div class="panel-body">
                 <li draggable="true" *ngFor="let place of droppedItems" class="list-group-item">
-                    <p>
-                            {{ place.venue.name }}
-                    </p>
-                    <p>
-                            {{ place.venue.location.address }}
-                    </p>
+                    <p>{{ place.venue.name }}</p>
+                    <p>{{ place.venue.location.address }}</p>
                 </li>
         </div>
     </div> 

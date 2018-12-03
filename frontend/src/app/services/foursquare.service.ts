@@ -6,8 +6,7 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
 import { map } from 'rxjs/operators';
-import { TripEvent } from './../../TripEvent/models/tripEvent.model';
-import { Adapter } from 'src/app/adapter';
+
 
 @Injectable({
     providedIn: 'root'
@@ -24,7 +23,7 @@ import { Adapter } from 'src/app/adapter';
       this.baseUri = 'https://api.foursquare.com/v2/venues/explore';
       this.extra = '&client_id=BEYZLUHIFTJIUFIZ1C5FYY5RCC0ULGFECYLK3GTKSNRP35HF&client_secret=NBYG53A5OFA0NKTYZE4SLLWBICTMWWSNZFSBWYYAL21QAFO1&v=20160201&m=foursquare';
     }
-
+ 
     getAllNear(place : string, category : string): Observable<Array<any>>{
       if (this.category === "*"){
         const url = this.baseUri + '?near=' + place + this.extra;
@@ -37,9 +36,7 @@ import { Adapter } from 'src/app/adapter';
         return this.http.get<any[]>(url).pipe(map(data => data));
       }
     }
-
-
-  }
+} 
 
 
 
