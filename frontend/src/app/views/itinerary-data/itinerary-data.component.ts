@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FoursquareService } from '../../Foursquare/services/foursquare.service';
 import 'rxjs/Rx';
 import { TripEvent } from './../../TripEvent/models/tripEvent.model';
+import { createEmptyStateSnapshot } from '@angular/router/src/router_state';
 
 @Component({
   selector: 'app-itinerary-data',
@@ -72,6 +73,8 @@ export class ItineraryDataComponent implements OnInit {
   }
 
   onItemDrop(e: any) {
+    const record:TripEvent={name:e.dragData.venue.name,address:e.dragData.venue.location.address};
+    console.log(record);
     // Get the dropped data here
     this.droppedItems.push(e.dragData);
     //console.log("drag Data " + e.dragData);
