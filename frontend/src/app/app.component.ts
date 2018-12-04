@@ -14,7 +14,9 @@ export class AppComponent implements OnInit {
 
   constructor(  
     private authService : AuthService
-  ) { }
+  ) { 
+    this.authService.handleAuthentication();
+  }
 
   login(): void{
     this.authService.login();
