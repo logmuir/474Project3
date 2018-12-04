@@ -8,7 +8,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 
 import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -19,11 +18,11 @@ import { ItineraryComponent } from './views/itinerary/itinerary.component';
 import { TripEventComponent } from './views/trip-event/trip-event.component';
 import { NgDragDropModule } from 'ng-drag-drop';
 import 'hammerjs';
+import { AuthService } from './Auth0/auth.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     AboutComponent,
     ItineraryDataComponent,
     HomeComponent,
@@ -42,7 +41,7 @@ import 'hammerjs';
     ReactiveFormsModule
   ],
   providers: [
-    ItineraryService, FoursquareService
+    ItineraryService, FoursquareService, AuthService
   ],
   bootstrap: [AppComponent]
 })
