@@ -8,26 +8,30 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var api = require('./routes/api.route')
 
-
 var bluebird = require('bluebird')
+
+var fs = require('fs');
+var mongoPassword = fs.readFileSync('./mongoPassword.txt', 'utf8');
 
 var mongoose = require('mongoose')
 mongoose.Promise = bluebird
-mongoose.connect('mongodb://127.0.0.1:27017/todoapp', {useNewUrlParser: true})
-  .then(() => { console.log(`Succesfully Connected to the Mongodb Database  at URL : mongodb://127.0.0.1:27017/todoapp`)})
-  .catch(() => { console.log(`Error Connecting to the Mongodb Database at URL : mongodb://127.0.0.1:27017/todoapp`) });
 
+var mongooseConnectionString = 'mongodb://ToDoAppReadWriteUser:';
+mongooseConnectionString += mongoPassword;
+mongooseConnectionString += '@100.34.18.126:65503/todoapp?authsource=admin'
 
+mongoose.connect(mongooseConnectionString, { useNewUrlParser: true })
+  .then(() => { console.log('Success! Connected to Mongo Database at + ' + mongooseConnectionString) })
+  .catch(() => { console.log('Error Connecting to Mongo Database at + ' + mongooseConnectionString) });
 
 var app = express();
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "http://localhost:4200");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   next();
 });
-
 
 
 // view engine setup

@@ -18,7 +18,6 @@ exports.getItinerarys = async function (query, page, limit) {
     }
 
     // Try Catch the awaited promise to handle the error 
-
     try {
         var itinerarys = await Itinerary.paginate(query, options)
 
@@ -27,10 +26,10 @@ exports.getItinerarys = async function (query, page, limit) {
         return itinerarys;
 
     } catch (e) {
-
+        
         // return a Error message describing the reason 
 
-        throw Error('Error while Paginating Itinerarys')
+        throw Error(e)
     }
 }
 
@@ -77,16 +76,11 @@ exports.updateItinerary = async function (itinerary) {
         return false;
     }
 
-    console.log(oldItinerary)
-
     //Edit the Itinerary Object
 
     oldItinerary.title = itinerary.title
     oldItinerary.description = itinerary.description
     oldItinerary.status = itinerary.status
-
-
-    console.log(oldItinerary)
 
     try {
         var savedItinerary = await oldItinerary.save()

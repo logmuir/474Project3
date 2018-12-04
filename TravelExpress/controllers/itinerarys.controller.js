@@ -13,12 +13,14 @@ exports.getItinerarys = async function (req, res, next) {
 
     // Check the existence of the query parameters, If the exists doesn't exists assign a default value
 
+    console.log(req.query);
+
     var page = req.query.page ? req.query.page : 1
     var limit = req.query.limit ? req.query.limit : 10;
 
     try {
 
-        var itinerarys = await ItineraryService.getItinerarys({}, page, limit)
+        var itinerarys = await ItineraryService.getItinerarys(req.query, page, limit)
 
         // Return the itinerarys list with the appropriate HTTP Status Code and Message.
 
@@ -61,13 +63,12 @@ exports.updateItinerary = async function (req, res, next) {
 
     // Id is necessary for the update
 
+
     if (!req.body._id) {
         return res.status(400).json({ status: 400., message: "Id must be present" })
     }
 
     var id = req.body._id;
-
-    console.log(req.body)
 
     var itinerary = {
         id,
@@ -90,7 +91,7 @@ exports.removeItinerary = async function (req, res, next) {
 
     try {
         var deleted = await ItineraryService.deleteItinerary(id)
-        return res.status(204).json({ status: 204, message: "Succesfully Itinerary Deleted" })
+        return res.status(204).json({ status: 204, message: "Itinerary successfully deleted" })
     } catch (e) {
         return res.status(400).json({ status: 400, message: e.message })
     }
