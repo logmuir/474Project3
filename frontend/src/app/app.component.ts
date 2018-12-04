@@ -20,6 +20,14 @@ export class AppComponent implements OnInit {
     this.authService.login();
   }
 
+  logout(): void{
+    this.authService.logout();
+  }
+
+  isAuthenticated(): void {
+    this.authService.isAuthenticated();
+  }
+
   ngOnInit(): void {
   }
 }
