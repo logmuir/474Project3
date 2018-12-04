@@ -16,6 +16,7 @@ import { Adapter } from 'src/app/adapter';
     baseUri: string;
     category: string = null;
     private headers = new Headers({
+      'Content-Type': 'application/json'
     });
     extra: string;
 
