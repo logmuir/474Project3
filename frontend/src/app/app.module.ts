@@ -1,7 +1,7 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ItineraryService } from './Itinerary/services/itinerary.service';
-import { AppRoutingModule } from './core/app.routing.module';
+import { AppRoutingModule } from '../app-routing.module';
 import { CustomMaterialModule } from './core/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
