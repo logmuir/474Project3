@@ -1,18 +1,11 @@
-class TripEvent {
-    _id: string;
-    title: string;
-    address: string;
-    date: Date;
-    status: string;
-    order: number;    
+export class TripEvent {   
 
     constructor(
-    ) {
-        this.title = ""
-        this.address = ""
-        this.date = new Date()
-        this.status = ""
-    }
-}
-
-export default TripEvent;
+        public name: string,
+        public address: string,
+        public date: Date,
+        public status: string,
+        public order: number
+    ) {}
+    
+} export default TripEvent;

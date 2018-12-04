@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FoursquareService } from '../../Foursquare/services/foursquare.service';
 import 'rxjs/Rx';
+import { TripEvent } from './../../TripEvent/models/tripEvent.model';
 
 @Component({
   selector: 'app-itinerary-data',
@@ -9,6 +10,9 @@ import 'rxjs/Rx';
   providers: [FoursquareService]
 })
 export class ItineraryDataComponent implements OnInit {
+  public selectedEvent;
+  tripEvent: TripEvent = null;
+  all_tripEvents: TripEvent[] = [];
   public displayMessage = "Categories";
   public sortOptions = ["*", "Drinks", "Coffee", "Shops", "Arts", "Outdoors", "Sights", "Trending", "Top Picks"]
   public show:boolean = false;
@@ -18,15 +22,10 @@ export class ItineraryDataComponent implements OnInit {
   place: string = null;
   category: string = null;
   droppedItems: Object[] = [];
-
-
-  p: number = 1;
   
   constructor(private foursquareService: FoursquareService) {}
 
-  ngOnInit() {
-    this.getEvents();
-  }
+  ngOnInit() {}
 
   getEvents() {
     this.foursquareService
@@ -35,6 +34,10 @@ export class ItineraryDataComponent implements OnInit {
         console.log(events);
         this.events = events;
       });
+  }
+
+  getId(){
+    //this.foursquareService.
   }
 
   onButtonClick(stringToSearchFor: string): void {
@@ -51,30 +54,50 @@ export class ItineraryDataComponent implements OnInit {
     return this.displayMessage;
   }
 
-  // isDropAllowed = (dragData: any) => {
-  //   // Resolves to true or false after 1 second
-  //   return Observable.of(dragData > this.val).delay(1000);
-  // }
+  drop(ev) {
+    console.log(ev);
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("text");
+    ev.target.appendChild(document.getElementById(data));
+  }
 
-  // onCheckBoxSelect(placeSelection: Object){
-  //   console.log(placeSelection);
-  //   this.itinerary_items.push(placeSelection);
-  //   console.log(this.itinerary_items);
-  // }
+  allowDrop(ev) {
+    console.log(ev);
+    ev.preventDefault();
+  }
 
-  // onChange(event, index, item) {
-  //   item.checked = !item.checked;
-  //   this.lastAction = 'index: ' + index + ', label: ' + item.label + ', checked: ' + item.checked;
-  //   console.log(index, event, item);
-  // }
+  drag(ev) {
+    console.log(ev);
+    ev.dataTransfer.setData("text", ev.target.id);
+  }
 
   onItemDrop(e: any) {
     // Get the dropped data here
-    console.log(e);
-    console.log(e.dragData);
     this.droppedItems.push(e.dragData);
-    console.log(this.droppedItems);
+    //console.log("drag Data " + e.dragData);
+    //console.log("dropepd Items " + this.droppedItems);
+    //var t1 = new TripEvent(e.response.groups.items.venue.name, e.response.groups.items.venue.location.address, new Date(), "", 2);
+    //console.log(t1);
+    //this.setData(e.dragData);
   }
+
+  setNameData(e: any, place: any){
+    var t1 = new TripEvent(place.response.groups.items.venue.name, "", new Date(), "", 2);
+    console.log(t1);
+  }
+
+  // onItemDelete(e: any){
+  //    var remove_index = this.droppedItems.indexOf(e.dragData);
+  //    if(remove_index > -1){
+  //      this.droppedItems.splice(remove_index, 1);
+  //    }
+  //    console.log(this.droppedItems);
+  //   //  var remove_index = this.all_tripEvents.indexOf(e.dragData);
+  //   //  if(remove_index > -1){
+  //   //    this.all_tripEvents.splice(remove_index, 1);
+  //   //  }
+  //   //  console.log(this.all_tripEvents);
+  // }
 
 }
 

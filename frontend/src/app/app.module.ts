@@ -1,5 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ItineraryService } from './Itinerary/services/itinerary.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { CustomMaterialModule } from './core/material.module';
