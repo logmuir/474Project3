@@ -75,18 +75,11 @@ export class ItineraryDataComponent implements OnInit {
   onItemDrop(e: any) {
     const record:TripEvent={name:e.dragData.venue.name,address:e.dragData.venue.location.address};
     console.log(record);
+    this.all_tripEvents.push(record);
+    console.log(this.all_tripEvents);
+
     // Get the dropped data here
     this.droppedItems.push(e.dragData);
-    //console.log("drag Data " + e.dragData);
-    //console.log("dropepd Items " + this.droppedItems);
-    //var t1 = new TripEvent(e.response.groups.items.venue.name, e.response.groups.items.venue.location.address, new Date(), "", 2);
-    //console.log(t1);
-    //this.setData(e.dragData);
-  }
-
-  setNameData(e: any, place: any){
-    var t1 = new TripEvent(place.response.groups.items.venue.name, "", new Date(), "", 2);
-    console.log(t1);
   }
 
   // onItemDelete(e: any){
