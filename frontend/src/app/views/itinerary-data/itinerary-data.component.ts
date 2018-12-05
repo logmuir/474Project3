@@ -37,10 +37,6 @@ export class ItineraryDataComponent implements OnInit {
       });
   }
 
-  getId(){
-    //this.foursquareService.
-  }
-
   onButtonClick(stringToSearchFor: string): void {
     this.place = stringToSearchFor;
     this.show = true;
@@ -72,28 +68,60 @@ export class ItineraryDataComponent implements OnInit {
     ev.dataTransfer.setData("text", ev.target.id);
   }
 
+  onVerticalDrag(ev) {
+    console.log("vertical drag");
+    console.log(ev);
+    //ev.dataTransfer.setData("text", ev.target.id);
+    var index = this.droppedItems.indexOf(ev.dragData);
+    console.log("index: " + index);
+  }
+
+  onItemDelete(ev){
+    console.log("delete process start");
+    console.log(ev.dragData);
+    var index = this.all_tripEvents.indexOf(ev.dragData);
+    if(index >-1){
+      this.all_tripEvents.splice(index, 1);
+      console.log("splice");
+    }
+    console.log(this.all_tripEvents);
+
+  }
+
+  // removeItem(item: any, list: Array<any>) {
+  //   console.log("remove item");
+  //   let index = list.map(function (e) {
+  //     return e.name
+  //   }).indexOf(item.name);
+  //   if(index >-1){
+  //     list.splice(index, 1);
+  //     console.log("splice in removeDuplicateItem");
+  //   }
+  // }
+
+  // removeDuplicateItem(item: any, list: Array<any>) {
+  //   console.log("remove item");
+  //   let index = list.map(function (e) {
+  //     console.log(e.name);
+  //     return e.name
+  //   }).indexOf(item.name);
+  //   if(index>-1){
+  //     list.splice(index, 1);
+  //     console.log("splice in removeDuplicateItem");
+  //   }
+  // }
+
   onItemDrop(e: any) {
+    console.log("item drop");
     const record:TripEvent={name:e.dragData.venue.name,address:e.dragData.venue.location.address};
     console.log(record);
     this.all_tripEvents.push(record);
-    console.log(this.all_tripEvents);
+    console.log("this.all_tripEvents: " + this.all_tripEvents);
 
     // Get the dropped data here
     this.droppedItems.push(e.dragData);
+    console.log(this.droppedItems.indexOf(e.dragData));
   }
-
-  // onItemDelete(e: any){
-  //    var remove_index = this.droppedItems.indexOf(e.dragData);
-  //    if(remove_index > -1){
-  //      this.droppedItems.splice(remove_index, 1);
-  //    }
-  //    console.log(this.droppedItems);
-  //   //  var remove_index = this.all_tripEvents.indexOf(e.dragData);
-  //   //  if(remove_index > -1){
-  //   //    this.all_tripEvents.splice(remove_index, 1);
-  //   //  }
-  //   //  console.log(this.all_tripEvents);
-  // }
 
 }
 

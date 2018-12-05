@@ -5,5 +5,11 @@ export class TripEvent{
     date: Date;
     status: string;
     order: number;    
+
+    constructor(){
+        this.date = new Date();
+        this.status = "incomplete";
+        this.order = 0;
+    }
     
 } export default TripEvent;

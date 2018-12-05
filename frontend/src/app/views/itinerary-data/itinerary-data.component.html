@@ -58,17 +58,14 @@
     <div droppable (onDrop)="onItemDrop($event)">
         <h2>Drop items here</h2>
         <div class="panel-body">
-                <li draggable="true" *ngFor="let place of droppedItems" class="list-group-item">
-                    <p>{{ place.venue.name }}</p>
-                    <p>{{ place.venue.location.address }}</p>
-                </li>
+                <div *ngFor="let tripEvent of all_tripEvents" class="list-group-item" draggable="true" [dragData]=tripEvent >
+                    <p> {{ tripEvent.name }}</p>
+                    <p>{{ tripEvent.address }}</p>
+                </div>
         </div>
     </div>
     <div droppable (onDrop)="onItemDelete($event)">
         <h2>Delete items from itinerary</h2>
-        <div class="panel-body">
-            <li *ngFor="let event of droppedItems" class="list-group-item"></li>
-        </div>
     </div>
 </div>
 </div>
