@@ -42,19 +42,16 @@
                 <div class="col-sm-6">
                     <br>
                     <h2>Potential Destinations</h2>
-                    <!-- <ng-template ngFor let-size [ngForOf]='response.groups'>
-                    <h3 *ngFor="let num of size.items; let i=index">{{ num }}</h3>
-                    </ng-template> -->
                     <div class="table-responsive" *ngIf='events'>
                         <table ng-table="tableParams" class="table ng-table-rowselected table-hover table-condensed table-striped table-responsive">
                             <ng-template ngFor let-group [ngForOf]='events.response.groups'>
-                                <tr class="emphasis" *ngFor="let place of group.items; let i=index;" draggable="true" (dragstart)="drag($event)"
+                                <tr *ngFor="let place of group.items; let i=index;" draggable="true" (dragstart)="drag($event)"
                                     [dragData]="place">
                                     <span class="name" data-title="'Place'">{{ place.venue.name}}</span><br>
                                     <span data-title="'Address'">{{ place.venue.location.address }} </span><br>
                                     <span data-title="'Category'" *ngFor="let category of place.venue.categories">
                                         {{ category.name }}
-                                    </span>
+                                    </span><br>
                                 </tr>
 
                             </ng-template>
@@ -71,15 +68,30 @@
                         <div class="panel-body">
                             <div *ngFor="let tripEvent of all_tripEvents" class="list-group-item" draggable="true"
                                 [dragData]=tripEvent>
-                                <p> {{ tripEvent.name }}</p>
-                                <p>{{ tripEvent.address }}</p>
+                                <span class="col-lg-5 col-md-5 col-sm-5 col-xs-5 itin_num"> {{ tripEvent.order + 1 }}</span>
+                                <span class="col-md-11">
+                                    <span> {{ tripEvent.name }}</span>
+                                    <p>
+                                        <span class="col-md-10 "></span>
+                                        <span class="col-md-2 ">{{ tripEvent.address }}</span>
+                                    </p>
+                                </span>
                             </div>
                         </div>
                     </div>
-                    <button class="button submit">Submit</button>
                     <ng-container *ngIf="show">
-                        <div *ngIf='droppedItems.length' droppable (onDrop)="onItemDelete($event)">
-                            <h2>Delete items from itinerary</h2>
+                        <button class="btn btn-outline-primary submit" *ngIf='droppedItems.length'>Save</button>
+                        <div class="submit-content">
+                            <p>
+                                Save your itinerary! Once it is saved, you can edit, rename, and share.
+                            </p>
+                        </div>
+                        <button class="btn btn-outline-primary trash" *ngIf='droppedItems.length' droppable (onDrop)="onItemDelete($event)">Drag
+                            Here to Delete</button>
+                        <div class="trash-content">
+                            <p>
+                                Drop an item here to delete it from your itinerary
+                            </p>
                         </div>
                     </ng-container>
                 </div>

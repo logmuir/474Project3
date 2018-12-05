@@ -11,6 +11,7 @@ import { createEmptyStateSnapshot } from '@angular/router/src/router_state';
   providers: [FoursquareService]
 })
 export class ItineraryDataComponent implements OnInit {
+  public items_in_itin = 0;
   public selectedEvent;
   tripEvent: TripEvent = null;
   all_tripEvents: TripEvent[] = [];
@@ -23,6 +24,7 @@ export class ItineraryDataComponent implements OnInit {
   place: string = null;
   category: string = null;
   droppedItems: Object[] = [];
+  map: any = null;
   
   constructor(private foursquareService: FoursquareService) {}
 
@@ -81,20 +83,27 @@ export class ItineraryDataComponent implements OnInit {
     console.log(ev.dragData);
     var index = this.all_tripEvents.indexOf(ev.dragData);
     if(index >-1){
+      if(index < this.all_tripEvents.length - 1){
+        for(var i=index; i<this.all_tripEvents.length; i++){
+          this.all_tripEvents[i].order = this.all_tripEvents[i].order - 1;
+        }
+      }
       this.all_tripEvents.splice(index, 1);
       console.log("splice");
     }
     console.log(this.all_tripEvents);
-
+    console.log(this.items_in_itin);
   }
 
   onItemDrop(e: any) {
     console.log("item drop");
-    const record:TripEvent={name:e.dragData.venue.name,address:e.dragData.venue.location.address};
+    var it_order = this.all_tripEvents.length;
+    const record:TripEvent={name:e.dragData.venue.name,address:e.dragData.venue.location.address,order:it_order};
     console.log(record);
+    
+    //this.record.order = order;
     this.all_tripEvents.push(record);
     console.log("this.all_tripEvents: " + this.all_tripEvents);
-
     // Get the dropped data here
     this.droppedItems.push(e.dragData);
     console.log(this.droppedItems.indexOf(e.dragData));
