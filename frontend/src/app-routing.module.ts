@@ -5,10 +5,14 @@ import { ItineraryDataComponent } from './app/views/itinerary-data/itinerary-dat
 import { HomeComponent } from './app/home/home.component'
 import { RouterModule, Routes } from '@angular/router';
 import { ItineraryComponent } from './app/views/itinerary/itinerary.component';
+import { AboutComponent } from './app/about/about.component';
+import { ContactusComponent } from './app/contactus/contactus.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
+  // { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent},
+  { path: 'contactus', component: ContactusComponent },
 
   {
     path: '',

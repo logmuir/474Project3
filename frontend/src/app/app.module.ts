@@ -19,6 +19,7 @@ import { ItineraryComponent } from './views/itinerary/itinerary.component';
 import { TripEventComponent } from './views/trip-event/trip-event.component';
 import { NgDragDropModule } from 'ng-drag-drop';
 import 'hammerjs';
+import { ContactusComponent } from './contactus/contactus.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import 'hammerjs';
     ItineraryDataComponent,
     HomeComponent,
     ItineraryComponent,
-    TripEventComponent
+    TripEventComponent,
+    ContactusComponent
   ],
   imports: [
     BrowserModule,
