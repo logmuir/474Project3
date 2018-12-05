@@ -15,7 +15,7 @@ export class AuthService {
     domain: 'maazn.auth0.com',
     responseType: 'token id_token',
     redirectUri: 'http://localhost:4200',
-    scope: 'openid email profile'
+    scope: 'openid email profile read:users'
   });
 
   constructor(public router: Router) {}
