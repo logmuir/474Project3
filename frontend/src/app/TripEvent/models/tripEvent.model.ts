@@ -4,8 +4,10 @@ export class TripEvent {
     order: number;
     status?: string;
 
-
-    constructor() {
+    constructor(){
+        this.order = 0;
+        this.status = "incomplete";
     }
+    
 
 } export default TripEvent;
