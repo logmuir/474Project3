@@ -36,7 +36,7 @@
     <div ng-controller="GridController">
         <ng-container *ngIf="show">
             <div class="row">
-                <div class="col-sm-6 pot-dest">
+                <div class="col-sm-5 pot-dest">
                     <br>
                     <h2>Potential Destinations</h2>
                     <div class="table-responsive" *ngIf='events'>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-sm-1"></div>
-                <div class="col-sm-5">
+                <div class="col-sm-6 it-list">
                     <div droppable (onDrop)="onItemDrop($event)">
                         <br>
                         <h2>Your Itinerary</h2>
