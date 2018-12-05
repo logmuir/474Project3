@@ -56,7 +56,7 @@ export class ItineraryDataComponent implements OnInit {
   }
 
   generateItineraryFromDroppedItems(): void {
-
+    
   }
 
   onDropDownSelect(categoryToSearchFor: string) {

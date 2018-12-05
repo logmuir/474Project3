@@ -8,7 +8,12 @@ export class Itinerary {
     status: string;
     all_tripEvents: TripEvent[];
 
-    constructor() {
+    constructor(title: string, description: string, date: Date, status: string, all_tripEvents: TripEvent[]) {
+        this.title = title;
+        this.description = description;
+        this.date = date;
+        this.status = status;
+        this.all_tripEvents = all_tripEvents;
         
     }
 }
