@@ -3,10 +3,22 @@
     bottom: 0;
 }
 
+.pot-dest{
+    padding-left: 2%;
+}
+
+.it-list{
+    padding-right: 2%;
+}
+
 .map {
     width: 100%;
     height: 400px;
     background-color: grey;
+}
+
+.title{
+    text-align: center;
 }
 
 /* .dragged_item{
@@ -33,9 +45,12 @@ tr {
 }
 
 .business-header {
-    height: 50vh;
-    min-height: 400px;
-    background: url('./travel-2081174_960_720.jpg') center center no-repeat scroll;
+    height: 85vh;
+    /* height: 100%;
+    width: 100%;
+    margin: 0; */
+    /* min-height: 600px; */
+    background: url('./travel-2081174_960_720.jpg') no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
