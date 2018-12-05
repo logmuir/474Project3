@@ -22,6 +22,7 @@ tr {
 .name{
     font-size: 120%;
     font-weight: bold;
+    color: #259ded;
 }
 
 .business-header {
@@ -107,4 +108,10 @@ tr {
 .itin_num{
     font-size: 200%;
     color: purple;
+}
+
+.itin-name{
+    font-size: 100%;
+    color: black;
+    font-weight: bold;
 }
