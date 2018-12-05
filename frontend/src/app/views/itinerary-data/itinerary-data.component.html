@@ -8,31 +8,29 @@
                     <h4 class="text-center text-white mt-4">Organize an itinerary based on your location and
                         preferences</h4>
                 </div>
-
-                <div class="buisness-header align-bottom">
-                    <div id="imaginary_container">
-                        <div class="input-group stylish-input-group">
-                            <input #wordToSearchFor type="text" class="form-control" placeholder="Enter a city, state...">
-                            <div class="row">
-                                <div class="col">
-                                    <div ngbDropdown class="d-inline-block">
-                                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{
-                                            displayMessage }}</button>
-                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                                            <div *ngFor="let option of sortOptions">
-                                                <button class="dropdown-item" id="option" on-click="onDropDownSelect(option)">{{option}}</button>
-                                            </div>
+            </div>
+            <div class="buisness-header">
+                <div class="col-lg-12 search-bar">
+                    <div class="input-group stylish-input-group">
+                        <input #wordToSearchFor type="text" class="form-control" placeholder="Enter a city, state...">
+                        <div class="row">
+                            <div class="col">
+                                <div ngbDropdown class="d-inline-block">
+                                    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{
+                                        displayMessage }}</button>
+                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                                        <div *ngFor="let option of sortOptions">
+                                            <button class="dropdown-item" id="option" on-click="onDropDownSelect(option)">{{option}}</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <button class="btn btn-outline-primary" (click)="onButtonClick(wordToSearchFor.value)">
-                                <span class="glyphicon glyphicon-search">Submit</span>
-                            </button>
                         </div>
+                        <button class="btn btn-outline-primary" (click)="onButtonClick(wordToSearchFor.value)">
+                            <span class="glyphicon glyphicon-search">Submit</span>
+                        </button>
                     </div>
                 </div>
-
             </div>
         </div>
     </header>
@@ -43,19 +41,20 @@
                     <br>
                     <h2>Potential Destinations</h2>
                     <div class="table-responsive" *ngIf='events'>
-                        <table ng-table="tableParams" class="table ng-table-rowselected table-hover table-condensed table-striped table-responsive">
+                        <table ng-table="tableParams" class="table table-condensed table-striped table-responsive">
                             <ng-template ngFor let-group [ngForOf]='events.response.groups'>
-                                <tr *ngFor="let place of group.items; let i=index;" draggable="true" (dragstart)="drag($event)"
-                                    [dragData]="place">
-                                    <span class="name" data-title="'Place'">{{ place.venue.name}}</span><br>
-                                    <span data-title="'Address'">{{ place.venue.location.address }} </span><br>
-                                    <span data-title="'Category'" *ngFor="let category of place.venue.categories">
+                                <tr *ngFor="let place of group.items | paginate: { itemsPerPage: 10, currentPage: p }; let i=index;"
+                                    draggable="true" (dragstart)="drag($event)" [dragData]="place">
+                                    <span class="name" data-title="'Place'">{{ place.venue.name}}</span>
+                                    <span class="category" data-title="'Category'" *ngFor="let category of place.venue.categories">
                                         {{ category.name }}
                                     </span><br>
+                                    <span data-title="'Address'">{{ place.venue.location.address }} </span><br>
                                 </tr>
 
                             </ng-template>
                         </table>
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -68,7 +67,7 @@
                         <div class="panel-body">
                             <div *ngFor="let tripEvent of all_tripEvents" class="list-group-item" draggable="true"
                                 [dragData]=tripEvent>
-                                <span class="col-lg-5 col-md-5 col-sm-5 col-xs-5 itin_num"> {{ tripEvent.order + 1 }}</span>
+                                <span class="col-md-5 itin_num"> {{ tripEvent.order + 1 }}</span>
                                 <span class="col-md-11">
                                     <span class="itin-name"> {{ tripEvent.name }}</span>
                                     <p>
