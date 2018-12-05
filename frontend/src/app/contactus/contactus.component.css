@@ -128,3 +128,14 @@ img {
 	-webkit-transition-delay: 0.2s;
 	transition-delay: 0.2s;
 }
+
+
+.business-header {
+	height: 85vh;
+	overflow-x: hidden;
+    background: url('https://static1.squarespace.com/static/597a014b914e6b983e3508df/t/5bc0d3b6b208fc1df53bd8b0/1539363770268/triangle+teal+background.jpg?') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
