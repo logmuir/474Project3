@@ -10,7 +10,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './views/home/home.component';
 import { AboutComponent } from './about/about.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ItineraryDataComponent } from './views/itinerary-data/itinerary-data.component';

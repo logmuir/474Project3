@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { LoginComponent } from './app/login/login.component';
 import { CommonModule } from '@angular/common';
 import { ItineraryDataComponent } from './app/views/itinerary-data/itinerary-data.component';
-import { HomeComponent } from './app/home/home.component'
+import { HomeComponent } from './app/views/home/home.component'
 import { RouterModule, Routes } from '@angular/router';
 import { ItineraryComponent } from './app/views/itinerary/itinerary.component';
 
