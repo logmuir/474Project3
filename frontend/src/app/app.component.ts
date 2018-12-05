@@ -10,7 +10,7 @@ import {AuthService} from './Auth0/auth.service';
 export class AppComponent implements OnInit {
 
   title = 'Travel Express';
-
+  profile: any;
 
   constructor(  
     private authService : AuthService
@@ -30,6 +30,15 @@ export class AppComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
-  ngOnInit(): void {
+  ngOnInit() :void {
+    if (this.authService.userProfile) {
+      this.profile = this.authService.userProfile;
+    } else {
+      this.authService.getProfile((err, profile) => {
+        this.profile = profile;
+      });
+    }
   }
+
+
 }

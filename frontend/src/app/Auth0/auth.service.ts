@@ -8,12 +8,14 @@ import * as auth0 from 'auth0-js';
 @Injectable()
 export class AuthService {
 
+  userProfile: any;
+
   private _auth0 = new auth0.WebAuth({
     clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
     domain: 'maazn.auth0.com',
     responseType: 'token id_token',
     redirectUri: 'http://localhost:4200',
-    scope: 'openid'
+    scope: 'openid email profile'
   });
 
   constructor(public router: Router) {}
@@ -44,6 +46,12 @@ export class AuthService {
   }
 
   public logout(): void {
+
+    this._auth0.logout({
+      returnTo:'http://localhost:4200',
+      clientId: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
+    });
+
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
@@ -58,5 +66,21 @@ export class AuthService {
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
   }
+
+
+public getProfile(cb): void {
+  const accessToken = localStorage.getItem('access_token');
+  if (!accessToken) {
+    throw new Error('Access Token must exist to fetch profile');
+  }
+
+  const self = this;
+  this._auth0.client.userInfo(accessToken, (err, profile) => {
+    if (profile) {
+      self.userProfile = profile;
+    }
+    cb(err, profile);
+  });
+}
 
 }

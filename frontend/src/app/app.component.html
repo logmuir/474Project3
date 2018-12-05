@@ -13,8 +13,8 @@
                 <li class="nav-item"><a class="nav-link" routerLink="myItineraries">My Itineraries</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="build">Build an Itinerary</a></li>
                 <li class="nav-item"><a class="nav-link" routerLink="courses">Contact Us</a></li>
-                <li id="login-button"><button class="nav-link" *ngIf="!isAuthenticated()" (click)="login()">Login</button></li>
-                <li id="logout-button"><button class="nav-link" *ngIf="isAuthenticated()" (click)="logout()">Logout</button></li>
+                <li class="nav-item"><a class="nav-link" *ngIf="!isAuthenticated()" (click)="login()">Login</a></li>
+                <li class="nav-item"><a class="nav-link" *ngIf="isAuthenticated()" (click)="logout()">Logout {{profile?.email}}</a></li>
             </ul>
         </div>
     </div>
