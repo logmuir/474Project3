@@ -56,7 +56,13 @@ export class ItineraryDataComponent implements OnInit {
   }
 
   saveItinerary(itinerary: Itinerary): void {
-    console.log(this.itineraryService.createItinerary(itinerary));
+    
+    this.itineraryService.createItinerary(itinerary);
+
+    this.itineraryService.createItinerary(itinerary)	
+    .subscribe((res) => {	
+      console.log(res);
+    })
   }
 
   generateItinerary(): Itinerary {
@@ -64,7 +70,7 @@ export class ItineraryDataComponent implements OnInit {
     let tripEvents = this.generateTripEventsFromDroppedItems();
 
 
-    let newItinerary = new Itinerary("Title Goes Here!", "Description goes here!", new Date( 2018, 1, 4), "Itinerary Status", tripEvents);
+    let newItinerary = new Itinerary("test@gmail.com", "Title Goes Here!", "Description goes here!", new Date( 2018, 1, 4), "Itinerary Status", tripEvents);
 
     return newItinerary;
   }

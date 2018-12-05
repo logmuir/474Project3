@@ -38,10 +38,12 @@ exports.createItinerary = async function (itinerary) {
     // Creating a new Mongoose Object by using the new keyword
 
     var newItinerary = new Itinerary({
-        title: itinerary.title,
-        description: itinerary.description,
-        date: new Date(),
-        status: itinerary.status
+        ownerEmail: itinerary.title,
+        title: itinerary.description,
+        description: itinerary.status,
+        date: itinerary.date,
+        status: itinerary.status,
+        all_tripEvents: itinerary.all_tripEvents
     })
 
     try {
