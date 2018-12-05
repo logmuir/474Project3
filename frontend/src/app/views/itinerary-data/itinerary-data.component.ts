@@ -74,6 +74,7 @@ export class ItineraryDataComponent implements OnInit {
   onItemDrop(e: any) {
     // Get the dropped data here
     this.droppedItems.push(e.dragData);
+    console.log(this.droppedItems);
     //console.log("drag Data " + e.dragData);
     //console.log("dropepd Items " + this.droppedItems);
     //var t1 = new TripEvent(e.response.groups.items.venue.name, e.response.groups.items.venue.location.address, new Date(), "", 2);
