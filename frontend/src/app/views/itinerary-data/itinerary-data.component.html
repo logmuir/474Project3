@@ -1,11 +1,15 @@
 <body ng-app="tablePlunker" style="margin: 10px;">
-    <h4 class="text-primary">Welcome, to build your itinerary, please enter a city,state in the search bar. Then, after
-        clicking search, select the items you would like to add to your itinerary!</h4>
-    <div ng-controller="GridController">
 
+    <header class="business-header">
         <div class="container">
             <div class="row">
-                <div class="col-sm-10 col-sm-offset-3">
+                <div class="col-lg-12">
+                    <h2 class="display-3 text-center text-white mt-4">Let's Adventure</h2>
+                    <h4 class="text-center text-white mt-4">Organize an itinerary based on your location and
+                        preferences</h4>
+                </div>
+
+                <div class="buisness-header align-bottom">
                     <div id="imaginary_container">
                         <div class="input-group stylish-input-group">
                             <input #wordToSearchFor type="text" class="form-control" placeholder="Enter a city, state...">
@@ -22,44 +26,48 @@
                                     </div>
                                 </div>
                             </div>
-                            <button (click)="onButtonClick(wordToSearchFor.value)">
+                            <button class="btn btn-outline-primary" (click)="onButtonClick(wordToSearchFor.value)">
                                 <span class="glyphicon glyphicon-search">Submit</span>
                             </button>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
+    </header>
+    <div ng-controller="GridController">
         <ng-container *ngIf="show">
             <div class="row">
                 <div class="col-sm-6">
+                    <br>
+                    <h2>Potential Destinations</h2>
+                    <!-- <ng-template ngFor let-size [ngForOf]='response.groups'>
+                    <h3 *ngFor="let num of size.items; let i=index">{{ num }}</h3>
+                    </ng-template> -->
                     <div class="table-responsive" *ngIf='events'>
                         <table ng-table="tableParams" class="table ng-table-rowselected table-hover table-condensed table-striped table-responsive">
-                            <thead>
-                                <tr>
-                                    <th>Place</th>
-                                    <th>Address</th>
-                                    <th>Category</th>
-                                </tr>
-                            </thead>
                             <ng-template ngFor let-group [ngForOf]='events.response.groups'>
-                                <tr *ngFor="let place of group.items; let i=index;" draggable="true" (dragstart)="drag($event)"
+                                <tr class="emphasis" *ngFor="let place of group.items; let i=index;" draggable="true" (dragstart)="drag($event)"
                                     [dragData]="place">
-                                    <td data-title="'Place'">{{ place.venue.name }}</td>
-                                    <td data-title="'Address'">{{ place.venue.location.address }} </td>
-                                    <td data-title="'Category'" *ngFor="let category of place.venue.categories">
+                                    <span class="name" data-title="'Place'">{{ place.venue.name}}</span><br>
+                                    <span data-title="'Address'">{{ place.venue.location.address }} </span><br>
+                                    <span data-title="'Category'" *ngFor="let category of place.venue.categories">
                                         {{ category.name }}
-                                    </td>
+                                    </span>
                                 </tr>
+
                             </ng-template>
                         </table>
                     </div>
                 </div>
-            <!-- </div> -->
-            <!-- <div class="row"> -->
                 <div class="col-sm-6">
                     <div droppable (onDrop)="onItemDrop($event)">
-                        <h2>Drop items here</h2>
+                        <br>
+                        <h2>Your Itinerary</h2>
+                        <div>
+                            <br>
+                        </div>
                         <div class="panel-body">
                             <div *ngFor="let tripEvent of all_tripEvents" class="list-group-item" draggable="true"
                                 [dragData]=tripEvent>
@@ -69,9 +77,11 @@
                         </div>
                     </div>
                     <button class="button submit">Submit</button>
-                    <div droppable (onDrop)="onItemDelete($event)">
-                        <h2>Delete items from itinerary</h2>
-                    </div>
+                    <ng-container *ngIf="show">
+                        <div *ngIf='droppedItems.length' droppable (onDrop)="onItemDelete($event)">
+                            <h2>Delete items from itinerary</h2>
+                        </div>
+                    </ng-container>
                 </div>
             </div>
         </ng-container>

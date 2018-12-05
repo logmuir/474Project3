@@ -1,3 +1,27 @@
+.search_bar{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.tr .border-bottom{
+    border-style: dotted;
+}
+
+.name{
+    font-size: 120%;
+}
+
+.business-header {
+    height: 50vh;
+    min-height: 400px;
+    background: url('./travel-2081174_960_720.jpg') center center no-repeat scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
+
 .column {
     float: left;
     width: 50%;
@@ -10,10 +34,12 @@
     clear: both;
 }
 
-.ng-table tr.emphasis td {
+.ng-table tr.emphasis {
     background: #DDD;
     background-color: #DDD;
     font-weight: bold;
+    border-bottom: dotted;
+    border-color: black;
 }
 
 .ng-table-rowselected tr {
@@ -32,7 +58,7 @@
 
 .stylish-input-group button{
     border:4;
-    background:transparent;
+    background: #e6ffff;
 }
 
 .submit {

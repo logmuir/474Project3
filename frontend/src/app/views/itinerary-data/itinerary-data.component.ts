@@ -88,29 +88,6 @@ export class ItineraryDataComponent implements OnInit {
 
   }
 
-  // removeItem(item: any, list: Array<any>) {
-  //   console.log("remove item");
-  //   let index = list.map(function (e) {
-  //     return e.name
-  //   }).indexOf(item.name);
-  //   if(index >-1){
-  //     list.splice(index, 1);
-  //     console.log("splice in removeDuplicateItem");
-  //   }
-  // }
-
-  // removeDuplicateItem(item: any, list: Array<any>) {
-  //   console.log("remove item");
-  //   let index = list.map(function (e) {
-  //     console.log(e.name);
-  //     return e.name
-  //   }).indexOf(item.name);
-  //   if(index>-1){
-  //     list.splice(index, 1);
-  //     console.log("splice in removeDuplicateItem");
-  //   }
-  // }
-
   onItemDrop(e: any) {
     console.log("item drop");
     const record:TripEvent={name:e.dragData.venue.name,address:e.dragData.venue.location.address};
