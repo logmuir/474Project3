@@ -52,11 +52,22 @@ export class ItineraryDataComponent implements OnInit {
 
   onSaveButtonClick(): void {
     console.log(this.droppedItems);
-    this.generateItineraryFromDroppedItems();
+    this.generateItinerary();
   }
 
-  generateItineraryFromDroppedItems(): void {
+  generateItinerary(): void {
     
+    let tripEvents = this.generateTripEventsFromDroppedItems();
+
+    this.droppedItems.forEach(droppedItem => {
+      console.log(droppedItem);
+    });
+
+    let newItinerary = new Itinerary("Title Goes Here!", "Description goes here!", new Date( 2018, 1, 4), "Status goes here!", tripEvents);
+  }
+
+  generateTripEventsFromDroppedItems(): TripEvent[] {
+    return null;
   }
 
   onDropDownSelect(categoryToSearchFor: string) {

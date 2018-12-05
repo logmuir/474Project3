@@ -14,7 +14,6 @@ export class Itinerary {
         this.date = date;
         this.status = status;
         this.all_tripEvents = all_tripEvents;
-        
     }
 }
 
