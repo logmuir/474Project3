@@ -23,6 +23,7 @@
         },
         {
             "label": "Serve backend and frontend",
+            "group": "build",
             "dependsOn": [
                 "Nodemon Backend",
                 "NG Serve Frontend"

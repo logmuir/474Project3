@@ -1,11 +1,9 @@
-export class TripEvent {   
-
-    constructor(
-        public name: string,
-        public address: string,
-        public date: Date,
-        public status: string,
-        public order: number
-    ) {}
+export class TripEvent{
+    _id: string;
+    title: string;
+    address: string;
+    date: Date;
+    status: string;
+    order: number;    
     
 } export default TripEvent;
