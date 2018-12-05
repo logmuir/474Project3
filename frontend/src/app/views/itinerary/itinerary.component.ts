@@ -15,8 +15,7 @@ export class ItineraryComponent implements OnInit {
     private itineraryService: ItineraryService
   ) { }
 
-  //Declaring the new itinerary Object and initilizing it
-
+  
   //An Empty list for the visible itinerary list
   existingItinerarys: Itinerary[];
   editItinerarys: Itinerary[] = [];
