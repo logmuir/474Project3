@@ -34,3 +34,9 @@
     border:4;
     background:transparent;
 }
+
+.submit {
+    background-color: green;
+}
+/* On mouse-over */
+.btn:hover {background: #eee;}

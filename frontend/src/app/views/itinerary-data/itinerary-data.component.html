@@ -30,43 +30,50 @@
                 </div>
             </div>
         </div>
-        <div class="column">
         <ng-container *ngIf="show">
-            <div class="table-responsive" *ngIf='events'>
-            <table ng-table="tableParams" class="table ng-table-rowselected table-hover table-condensed table-striped table-responsive">
-                <thead>
-                    <tr>
-                        <th>Place</th>
-                        <th>Address</th>
-                        <th>Category</th>
-                    </tr>
-                </thead>
-                <ng-template ngFor let-group [ngForOf]='events.response.groups'>
-                    <tr *ngFor="let place of group.items; let i=index;" draggable="true" (dragstart)="drag($event)" [dragData]="place">
-                            <td data-title="'Place'" >{{ place.venue.name }}</td>
-                            <td data-title="'Address'">{{ place.venue.location.address }} </td>
-                            <td data-title="'Category'" *ngFor="let category of place.venue.categories">
-                                {{ category.name }}
-                            </td>   
-                    </tr>
-                </ng-template>
-                </table>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="table-responsive" *ngIf='events'>
+                        <table ng-table="tableParams" class="table ng-table-rowselected table-hover table-condensed table-striped table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>Place</th>
+                                    <th>Address</th>
+                                    <th>Category</th>
+                                </tr>
+                            </thead>
+                            <ng-template ngFor let-group [ngForOf]='events.response.groups'>
+                                <tr *ngFor="let place of group.items; let i=index;" draggable="true" (dragstart)="drag($event)"
+                                    [dragData]="place">
+                                    <td data-title="'Place'">{{ place.venue.name }}</td>
+                                    <td data-title="'Address'">{{ place.venue.location.address }} </td>
+                                    <td data-title="'Category'" *ngFor="let category of place.venue.categories">
+                                        {{ category.name }}
+                                    </td>
+                                </tr>
+                            </ng-template>
+                        </table>
+                    </div>
+                </div>
+            <!-- </div> -->
+            <!-- <div class="row"> -->
+                <div class="col-sm-6">
+                    <div droppable (onDrop)="onItemDrop($event)">
+                        <h2>Drop items here</h2>
+                        <div class="panel-body">
+                            <div *ngFor="let tripEvent of all_tripEvents" class="list-group-item" draggable="true"
+                                [dragData]=tripEvent>
+                                <p> {{ tripEvent.name }}</p>
+                                <p>{{ tripEvent.address }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="button submit">Submit</button>
+                    <div droppable (onDrop)="onItemDelete($event)">
+                        <h2>Delete items from itinerary</h2>
+                    </div>
+                </div>
             </div>
         </ng-container>
     </div>
-    <div class="column" >
-    <div droppable (onDrop)="onItemDrop($event)">
-        <h2>Drop items here</h2>
-        <div class="panel-body">
-                <div *ngFor="let tripEvent of all_tripEvents" class="list-group-item" draggable="true" [dragData]=tripEvent >
-                    <p> {{ tripEvent.name }}</p>
-                    <p>{{ tripEvent.address }}</p>
-                </div>
-        </div>
-    </div>
-    <div droppable (onDrop)="onItemDelete($event)">
-        <h2>Delete items from itinerary</h2>
-    </div>
-</div>
-</div>
 </body>
