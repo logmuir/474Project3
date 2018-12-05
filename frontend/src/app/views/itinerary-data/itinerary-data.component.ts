@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FoursquareService } from '../../Foursquare/services/foursquare.service';
 import 'rxjs/Rx';
 import { TripEvent } from './../../TripEvent/models/tripEvent.model';
+import { ItineraryService } from '../../Itinerary/services/itinerary.service'
+import { Itinerary } from "../../Itinerary/models/itinerary.model";
+
 
 @Component({
   selector: 'app-itinerary-data',
@@ -15,39 +18,48 @@ export class ItineraryDataComponent implements OnInit {
   all_tripEvents: TripEvent[] = [];
   public displayMessage = "Categories";
   public sortOptions = ["*", "Drinks", "Coffee", "Shops", "Arts", "Outdoors", "Sights", "Trending", "Top Picks"]
-  public show:boolean = false;
-  public buttonName:any = 'Show';
+  public show: boolean = false;
+  public buttonName: any = 'Show';
   lastAction: string;
-  events:any = null;
+  events: any = null;
   place: string = null;
   category: string = null;
   droppedItems: Object[] = [];
-  
-  constructor(private foursquareService: FoursquareService) {}
 
-  ngOnInit() {}
+  constructor(private foursquareService: FoursquareService) { }
+
+  ngOnInit() { }
 
   getEvents() {
     this.foursquareService
-    .getAllNear(this.place, this.category)
+      .getAllNear(this.place, this.category)
       .subscribe(events => {
         console.log(events);
         this.events = events;
       });
   }
 
-  getId(){
+  getId() {
     //this.foursquareService.
   }
 
-  onButtonClick(stringToSearchFor: string): void {
+  onSearchButtonClick(stringToSearchFor: string): void {
     this.place = stringToSearchFor;
     this.show = true;
     this.getEvents();
     console.log(stringToSearchFor)
   }
 
-  onDropDownSelect(categoryToSearchFor: string){
+  onSaveButtonClick(): void {
+    console.log(this.droppedItems);
+    this.generateItineraryFromDroppedItems();
+  }
+
+  generateItineraryFromDroppedItems(): void {
+
+  }
+
+  onDropDownSelect(categoryToSearchFor: string) {
     this.displayMessage = categoryToSearchFor;
     this.category = categoryToSearchFor;
     console.log(this.displayMessage);
@@ -82,7 +94,7 @@ export class ItineraryDataComponent implements OnInit {
     //this.setData(e.dragData);
   }
 
-  setNameData(e: any, place: any){
+  setNameData(e: any, place: any) {
     var t1 = new TripEvent();
     console.log(t1);
   }
