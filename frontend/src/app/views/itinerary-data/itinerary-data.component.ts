@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FoursquareService } from '../../Foursquare/services/foursquare.service';
 import 'rxjs/Rx';
+import { Itinerary } from "../../Itinerary/models/itinerary.model";
 import { TripEvent } from './../../TripEvent/models/tripEvent.model';
 import { ItineraryService } from '../../Itinerary/services/itinerary.service'
-import { Itinerary } from "../../Itinerary/models/itinerary.model";
 
 
 @Component({
@@ -26,7 +26,7 @@ export class ItineraryDataComponent implements OnInit {
   category: string = null;
   droppedItems: Object[] = [];
 
-  constructor(private foursquareService: FoursquareService) { }
+  constructor(private foursquareService: FoursquareService, private itineraryService: ItineraryService) { }
 
   ngOnInit() { }
 
@@ -34,7 +34,6 @@ export class ItineraryDataComponent implements OnInit {
     this.foursquareService
       .getAllNear(this.place, this.category)
       .subscribe(events => {
-        console.log(events);
         this.events = events;
       });
   }
@@ -47,57 +46,65 @@ export class ItineraryDataComponent implements OnInit {
     this.place = stringToSearchFor;
     this.show = true;
     this.getEvents();
-    console.log(stringToSearchFor)
   }
 
   onSaveButtonClick(): void {
-    console.log(this.droppedItems);
-    this.generateItinerary();
+    let generatedItinerary = this.generateItinerary();
+    console.log(generatedItinerary)
+    this.saveItinerary(generatedItinerary);
+
   }
 
-  generateItinerary(): void {
+  saveItinerary(itinerary: Itinerary): void {
+    console.log(this.itineraryService.createItinerary(itinerary));
+  }
+
+  generateItinerary(): Itinerary {
     
     let tripEvents = this.generateTripEventsFromDroppedItems();
 
-    this.droppedItems.forEach(droppedItem => {
-      console.log(droppedItem);
-    });
 
-    let newItinerary = new Itinerary("Title Goes Here!", "Description goes here!", new Date( 2018, 1, 4), "Status goes here!", tripEvents);
+    let newItinerary = new Itinerary("Title Goes Here!", "Description goes here!", new Date( 2018, 1, 4), "Itinerary Status", tripEvents);
+
+    return newItinerary;
   }
 
   generateTripEventsFromDroppedItems(): TripEvent[] {
-    return null;
+    let tripEvents = new Array<TripEvent>();
+
+    let currentIndex = 0;
+    this.droppedItems.forEach(droppedItem => {
+      tripEvents.push(new TripEvent(droppedItem["venue"]["name"], droppedItem["venue"]["location"]["formattedAddress"], currentIndex, "TripEvent Status"));
+
+      currentIndex++;
+    });
+
+    return tripEvents;
   }
 
   onDropDownSelect(categoryToSearchFor: string) {
     this.displayMessage = categoryToSearchFor;
     this.category = categoryToSearchFor;
-    console.log(this.displayMessage);
     return this.displayMessage;
   }
 
   drop(ev) {
-    console.log(ev);
     ev.preventDefault();
     var data = ev.dataTransfer.getData("text");
     ev.target.appendChild(document.getElementById(data));
   }
 
   allowDrop(ev) {
-    console.log(ev);
     ev.preventDefault();
   }
 
   drag(ev) {
-    console.log(ev);
     ev.dataTransfer.setData("text", ev.target.id);
   }
 
   onItemDrop(e: any) {
     // Get the dropped data here
     this.droppedItems.push(e.dragData);
-    console.log(this.droppedItems);
     //console.log("drag Data " + e.dragData);
     //console.log("dropepd Items " + this.droppedItems);
     //var t1 = new TripEvent(e.response.groups.items.venue.name, e.response.groups.items.venue.location.address, new Date(), "", 2);
@@ -105,17 +112,11 @@ export class ItineraryDataComponent implements OnInit {
     //this.setData(e.dragData);
   }
 
-  setNameData(e: any, place: any) {
-    var t1 = new TripEvent();
-    console.log(t1);
-  }
-
   // onItemDelete(e: any){
   //    var remove_index = this.droppedItems.indexOf(e.dragData);
   //    if(remove_index > -1){
   //      this.droppedItems.splice(remove_index, 1);
   //    }
-  //    console.log(this.droppedItems);
   //   //  var remove_index = this.all_tripEvents.indexOf(e.dragData);
   //   //  if(remove_index > -1){
   //   //    this.all_tripEvents.splice(remove_index, 1);
