@@ -1,16 +1,11 @@
 export class TripEvent {
-    _id: string;
-    Name: string;
+    name: string;
     formattedAddress: string[];
     order: number;
-    status: string;
+    status?: string;
 
 
-    constructor(Name: string, formattedAddress: string[], order: number, status: string) {
-        this.Name = Name;
-        this.formattedAddress = formattedAddress;
-        this.order = order;
-        this.status = status;
+    constructor() {
     }
 
 } export default TripEvent;

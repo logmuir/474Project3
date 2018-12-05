@@ -6,8 +6,6 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
 import { map } from 'rxjs/operators';
-import { TripEvent } from './../../TripEvent/models/tripEvent.model';
-import { Adapter } from 'src/app/adapter';
 
 @Injectable({
     providedIn: 'root'

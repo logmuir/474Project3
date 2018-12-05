@@ -6,6 +6,7 @@ import { CustomMaterialModule } from './core/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -39,7 +40,8 @@ import 'hammerjs';
     NgbModule.forRoot(),
     NgDragDropModule.forRoot(),
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [
     ItineraryService, FoursquareService
