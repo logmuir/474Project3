@@ -82,7 +82,7 @@ export class ItineraryDataComponent implements OnInit {
   }
 
   setNameData(e: any, place: any){
-    var t1 = new TripEvent(place.response.groups.items.venue.name, "", new Date(), "", 2);
+    var t1 = new TripEvent();
     console.log(t1);
   }
 

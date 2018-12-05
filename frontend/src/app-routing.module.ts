@@ -5,6 +5,7 @@ import { ItineraryDataComponent } from './app/views/itinerary-data/itinerary-dat
 import { HomeComponent } from './app/views/home/home.component'
 import { RouterModule, Routes } from '@angular/router';
 import { ItineraryComponent } from './app/views/itinerary/itinerary.component';
+import { AboutComponent } from './app/about/about.component';
 
 const routes: Routes = [
 
@@ -30,7 +31,11 @@ const routes: Routes = [
     path: 'myItineraries',
     component: ItineraryComponent,
     data: { title: 'My Itineraries' }
-  }
+  },
+  {
+    path: 'about',
+    component: AboutComponent
+  },
 ];
 
 
