@@ -6,18 +6,9 @@ import { HomeComponent } from './app/views/home/home.component'
 import { RouterModule, Routes } from '@angular/router';
 import { ItineraryComponent } from './app/views/itinerary/itinerary.component';
 import { AboutComponent } from './app/about/about.component';
-<<<<<<< HEAD
 import { ContactusComponent } from './app/contactus/contactus.component';
 
 const routes: Routes = [
-  // { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'about', component: AboutComponent},
-  { path: 'contactus', component: ContactusComponent },
-=======
-
-const routes: Routes = [
->>>>>>> 9b5d0eb4df28a938487122e78ced9f1570f01b88
 
   {
     path: '',
@@ -46,6 +37,11 @@ const routes: Routes = [
     path: 'about',
     component: AboutComponent
   },
+
+  {
+    path: 'contactus',
+    component: ContactusComponent
+  }
 ];
 
 
