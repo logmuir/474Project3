@@ -7,8 +7,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { ItineraryComponent } from './app/views/itinerary/itinerary.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
 
   {
     path: '',
@@ -16,14 +14,22 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'foursquare',
-    component: ItineraryDataComponent,
-    data: { title: 'Foursquare List' }
+    path: 'home',
+    component: HomeComponent
   },
   {
-    path: 'itinerary',
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'itineraryBuilder',
+    component: ItineraryDataComponent,
+    data: { title: 'Itinerary Builder' }
+  },
+  {
+    path: 'myItineraries',
     component: ItineraryComponent,
-    data: {title: 'Itinerary DB'}
+    data: { title: 'My Itineraries' }
   }
 ];
 
@@ -32,6 +38,6 @@ const routes: Routes = [
   declarations: [],
   imports: [RouterModule.forRoot(routes), CommonModule],
   exports: [RouterModule]
-  
+
 })
 export class AppRoutingModule { }
