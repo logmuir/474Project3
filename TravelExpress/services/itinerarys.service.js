@@ -26,7 +26,7 @@ exports.getItinerarys = async function (query, page, limit) {
         return itinerarys;
 
     } catch (e) {
-        
+
         // return a Error message describing the reason 
 
         throw Error(e)
@@ -38,10 +38,10 @@ exports.createItinerary = async function (itinerary) {
     // Creating a new Mongoose Object by using the new keyword
 
     var newItinerary = new Itinerary({
-        ownerEmail: itinerary.title,
-        title: itinerary.description,
-        description: itinerary.status,
-        date: itinerary.date,
+        title: itinerary.title,
+        description: itinerary.description,
+        start_date: itinerary.start_date,
+        end_date: itinerary.end_date,
         status: itinerary.status,
         all_tripEvents: itinerary.all_tripEvents
     })

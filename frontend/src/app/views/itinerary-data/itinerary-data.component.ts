@@ -91,7 +91,6 @@ export class ItineraryDataComponent implements OnInit {
   }
 
   saveItinerary(itinerary: Itinerary): void {
-    this.itineraryService.createItinerary(itinerary);
     this.itineraryService.createItinerary(itinerary)	
     .subscribe((res) => {	
       console.log(res);

@@ -40,12 +40,12 @@ exports.createItinerary = async function (req, res, next) {
     // Req.Body contains the form submit values.
 
     console.log(req.body)
-
+  
     var itinerary = {
-        ownerEmail: req.body.title,
-        title: req.body.description,
-        description: req.body.status,
-        date: req.body.date,
+        title: req.body.title,
+        description: req.body.description,
+        start_date: req.body.start_date,
+        end_date: req.body.end_date,
         status: req.body.status,
         all_tripEvents: req.body.all_tripEvents
     }
