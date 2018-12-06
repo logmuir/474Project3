@@ -7,8 +7,8 @@ import {AuthService} from './Auth0/auth.service';
   templateUrl: './app.component.html'
   // styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnChanges {
 
+export class AppComponent implements OnInit, OnChanges {
   title = 'Travel Express';
   profile: any;
 
@@ -28,9 +28,6 @@ export class AppComponent implements OnInit, OnChanges {
 
   isAuthenticated(): boolean {
     return this.authService.isAuthenticated();
-  }
-
-  ngOnChanges() :void {
   }
 
   ngOnInit(): void{
