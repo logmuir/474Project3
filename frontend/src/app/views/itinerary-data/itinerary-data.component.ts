@@ -83,6 +83,13 @@ export class ItineraryDataComponent implements OnInit {
     this.getEvents();
   }
 
+  onEnter(event) {
+    if (event.keyCode == 13) {
+      this.onSearchButtonClick(event.target.value);
+      return false;
+    }
+  }
+
   onSaveButtonClick(title: string, description: string, from: any, to: any): void {
     let generatedItinerary = this.generateItinerary(title, description, from, to);
     console.log(generatedItinerary)
