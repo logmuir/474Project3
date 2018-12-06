@@ -9,7 +9,6 @@ import { NgModule } from '@angular/core';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 
 import { HomeComponent } from './views/home/home.component';
 import { AboutComponent } from './about/about.component';
@@ -21,11 +20,12 @@ import { TripEventComponent } from './views/trip-event/trip-event.component';
 import { NgDragDropModule } from 'ng-drag-drop';
 import 'hammerjs';
 import { ContactusComponent } from './contactus/contactus.component';
+import { AuthService } from './Auth0/auth.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     AboutComponent,
     ItineraryDataComponent,
     HomeComponent,
@@ -46,7 +46,7 @@ import { ContactusComponent } from './contactus/contactus.component';
     NgxPaginationModule
   ],
   providers: [
-    ItineraryService, FoursquareService
+    ItineraryService, FoursquareService, AuthService
   ],
   bootstrap: [AppComponent]
 })

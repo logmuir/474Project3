@@ -2,21 +2,31 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
+import { Observable, Observer } from 'rxjs';
+
+
+
 
 (window as any).global = window;
 
 @Injectable()
 export class AuthService {
 
+  userProfile: any;
+  userEmail: any;
+
   private _auth0 = new auth0.WebAuth({
     clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
     domain: 'maazn.auth0.com',
     responseType: 'token id_token',
     redirectUri: 'http://localhost:4200',
-    scope: 'openid'
+    scope: 'openid email profile'
   });
 
-  constructor(public router: Router) {}
+  private observer: Observer<any>;
+  profChanges: Observable<any> = new Observable(obs => this.observer = obs);
+
+  constructor(public router: Router) { }
 
   public login(): void {
     this._auth0.authorize();
@@ -27,9 +37,9 @@ export class AuthService {
       if (authResult && authResult.accessToken && authResult.idToken) {
         window.location.hash = '';
         this.setSession(authResult);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       } else if (err) {
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
         console.log(err);
       }
     });
@@ -44,6 +54,12 @@ export class AuthService {
   }
 
   public logout(): void {
+
+    this._auth0.logout({
+      returnTo: 'http://localhost:4200',
+      clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
+    });
+
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
@@ -57,6 +73,20 @@ export class AuthService {
     // Access Token's expiry time
     const expiresAt = JSON.parse(localStorage.getItem('expires_at') || '{}');
     return new Date().getTime() < expiresAt;
+  }
+
+  public getEmail(): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('Access Token must exist to fetch profile');
+    }
+
+    const self = this;
+    this._auth0.client.userInfo(accessToken, (err, email) => {
+      if (email) {
+        this.userEmail = email;
+      }
+    });
   }
 
 }
