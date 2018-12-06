@@ -9,10 +9,11 @@
 </div>
 
 <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-  <tr class="itinerary" (dblclick)="editItinerary(itinerary)" *ngFor="let itinerary of existingItinerarys">
-    <ngb-panel title={{itinerary.title}}>
+  <tr class="itinerary" *ngFor="let itinerary of existingItinerarys; let i = index">
+    <ngb-panel title="Itinerary: {{i}} - {{itinerary.title}}">
       <ng-template ngbPanelContent>
         <div class="acc-content" *ngIf="!editItinerarys.includes(itinerary); else editTD">
+          <td><b>Title:</b> {{itinerary.title}}</td>
           <td><b>Description:</b> {{itinerary.description}}</td>
           <td><b>Start Date:</b> {{itinerary.start_date}}</td>
           <td><b>End Date:</b> {{itinerary.end_date}}</td>
