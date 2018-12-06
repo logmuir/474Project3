@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, OnChanges,  } from '@angular/core';
 import {AuthService} from './Auth0/auth.service';
   import { from } from 'rxjs';
 
@@ -7,7 +7,7 @@ import {AuthService} from './Auth0/auth.service';
   templateUrl: './app.component.html'
   // styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnChanges, AfterViewInit{
+export class AppComponent implements OnInit, OnChanges {
 
   title = 'Travel Express';
   profile: any;
