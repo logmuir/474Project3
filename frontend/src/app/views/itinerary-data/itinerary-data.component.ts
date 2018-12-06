@@ -6,6 +6,8 @@ import { TripEvent } from './../../TripEvent/models/tripEvent.model';
 import { ItineraryService } from '../../Itinerary/services/itinerary.service'
 import { createEmptyStateSnapshot } from '@angular/router/src/router_state';
 import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-itinerary-data',
@@ -31,7 +33,7 @@ export class ItineraryDataComponent implements OnInit {
   fromDate: NgbDate;
   toDate: NgbDate;
 
-  constructor(private foursquareService: FoursquareService, private itineraryService: ItineraryService, calendar: NgbCalendar) {
+  constructor(private router: Router, private foursquareService: FoursquareService, private itineraryService: ItineraryService, calendar: NgbCalendar) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
@@ -94,7 +96,7 @@ export class ItineraryDataComponent implements OnInit {
     let generatedItinerary = this.generateItinerary(title, description, from, to);
     console.log(generatedItinerary)
     this.saveItinerary(generatedItinerary);
-
+    this.router.navigate(['/myItineraries'])
   }
 
   saveItinerary(itinerary: Itinerary): void {
