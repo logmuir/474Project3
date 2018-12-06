@@ -39,6 +39,7 @@ exports.createItinerary = async function (itinerary) {
 
     var newItinerary = new Itinerary({
         title: itinerary.title,
+        ownerEmail: itinerary.ownerEmail,
         description: itinerary.description,
         start_date: itinerary.start_date,
         end_date: itinerary.end_date,

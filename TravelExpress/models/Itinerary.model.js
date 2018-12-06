@@ -4,6 +4,7 @@ var mongoosePaginate = require('mongoose-paginate')
 
 var ItinerarySchema = new mongoose.Schema({
     title: String,
+    ownerEmail: String,
     description: String,
     start_date: String,
     end_date: String,

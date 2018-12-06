@@ -48,19 +48,6 @@ export class ItineraryComponent implements OnInit {
     }
   }
 
-  getUserInformation() {
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + <string>this.userAccessToken
-      })
-    }
-    this.http.get("https://maazn.auth0.com/userinfo", httpOptions).subscribe(
-      resp => console.log("Hello " + resp["nickname"]
-      ));
-
-    console.log('hello ' + this.userAccessToken);
-  }
-
   doneItinerary(itinerary: Itinerary) {
     itinerary.status = 'Done'
     this.itineraryService.editItinerary(itinerary).subscribe(res => {
@@ -83,14 +70,26 @@ export class ItineraryComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-    //this.currentUserEmail = 'test@gmail.com';
-    // this.currentUserEmail = 'anotherTest@gmail.com';
-    this.itineraryService.getItinerarys(this.currentUserEmail)
+  getItineraries(currentUserEmail: String) {
+    this.itineraryService.getItinerarys(currentUserEmail)
       .subscribe(itinerarys => {
         this.existingItinerarys = itinerarys
       })
+  }
+
+  ngOnInit(): void {
     this.userAccessToken = localStorage.getItem('access_token');
-    this.getUserInformation();
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + <string>this.userAccessToken
+      })
+    }
+
+
+    this.http.get("https://maazn.auth0.com/userinfo", httpOptions).subscribe(
+      resp => this.getItineraries(resp["email"])
+      );
+
   }
 }

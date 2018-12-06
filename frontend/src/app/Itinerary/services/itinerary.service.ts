@@ -28,7 +28,7 @@ export class ItineraryService {
     console.log("Target Email: " + targetOwnerEmail);
     let params = new HttpParams();
     
-    //params = params.append("ownerEmail", targetOwnerEmail)
+    params = params.append("ownerEmail", targetOwnerEmail)
     return this.http.get(this.itineraryUrl, {params: params})
       .pipe(map(res => {
         return res["data"].docs as Itinerary[];
