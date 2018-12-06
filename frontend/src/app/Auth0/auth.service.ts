@@ -19,7 +19,7 @@ export class AuthService {
     domain: 'maazn.auth0.com',
     responseType: 'token id_token',
     redirectUri: 'http://localhost:4200',
-    scope: 'openid email profile read:users'
+    scope: 'openid email profile'
   });
 
   private observer: Observer <any>;
@@ -37,12 +37,11 @@ export class AuthService {
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/home']);
-        
+        this.getProfile();       
       } else if (err) {
         this.router.navigate(['/home']);
         console.log(err);
       }
-      this.getProfile(); 
     });
   }
 
