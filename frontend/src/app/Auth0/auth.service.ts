@@ -49,6 +49,13 @@ export class AuthService {
   }
 
   public logout(): void {
+
+    this.auth0.logout ({
+      returnTo:'http://localhost:4200',
+      clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T'
+    });
+
+
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
