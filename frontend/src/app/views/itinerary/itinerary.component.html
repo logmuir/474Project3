@@ -1,40 +1,22 @@
-<table class="table">
-  <thead class="h">
-    <tr class="h">
-      <th class="h">Title</th>
-      <th class="h">Description</th>
-      <th class="h">Events</th>
-      <th class="h">Date</th>
-      <th class="h">Status</th>
-      <th class="h">Options</th>
-    </tr>
-  </thead>
-  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-    <tr class="itinerary" (dblclick)="editItinerary(itinerary)" *ngFor="let itinerary of existingItinerarys">
-      <ngb-panel title={{itinerary.title}}>
-        <ng-template ngbPanelContent>
-          <div class="acc-content" *ngIf="!editItinerarys.includes(itinerary); else editTD">
-            <p>Title: {{itinerary.title}}</p>
-            <p>Description: {{itinerary.description}}</p>
-            <p>Start Date: {{itinerary.start_date}}</p>
-            <p>End Date: {{itinerary.end_date}}</p>
-            <p>Status: {{itinerary.status}}</p>
-          </div>
-          
+<div class="business-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2 class="title text-center display-2 text-black text-shadow mt-4">My Itineraries</h2>
+            </div>
+        </div>
+    </div>
+</div>
 
-          <ng-template #editTD>
-            <td><input type="text" name="title" id="title" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.title"
-                placeholder="Title" class="form-control"></td>
-            <td><input type="text" name="description" id="description" (keypress)="submitItinerary($event, itinerary)"
-                [(ngModel)]="itinerary.description" placeholder="Description" class="form-control"></td>
-            <td>{{itinerary.date | date}}</td>
-            <td>
-              <input type="text" name="status" id="status" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.status"
-                placeholder="Status" class="form-control">
-            </td>
-          </ng-template>
-
-
+<ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+  <tr class="itinerary" (dblclick)="editItinerary(itinerary)" *ngFor="let itinerary of existingItinerarys">
+    <ngb-panel title={{itinerary.title}}>
+      <ng-template ngbPanelContent>
+        <div class="acc-content" *ngIf="!editItinerarys.includes(itinerary); else editTD">
+          <td><b>Description:</b> {{itinerary.description}}</td>
+          <td><b>Start Date:</b> {{itinerary.start_date}}</td>
+          <td><b>End Date:</b> {{itinerary.end_date}}</td>
+          <td><b>Status:</b> {{itinerary.status}}</td>
           <td class="o">
             <button class="btn btn-success" (click)="doneItinerary(itinerary)" button title="Submit Itinerary">
               <i class="fa fa-check"></i>
@@ -46,32 +28,8 @@
               <i class="fa fa-trash"></i>
             </button>
           </td>
-        </ng-template>
-      </ngb-panel>
-      <!-- NEXT PANEL-->
-      <!-- <ngb-panel title="Simple">
-       <ng-template ngbPanelContent> content
-        </ng-template>
-    </ngb-panel> -->
-      <!-- LAST PANEL-->
-      <!-- <ngb-panel title="Simple">
-      <ng-template ngbPanelContent>content
+        </div>
       </ng-template>
-    </ngb-panel> -->
-  </ngb-accordion>
-  <!-- <tbody>
-    <tr class="itinerary" (dblclick)="editItinerary(itinerary)" *ngFor="let itinerary of existingItinerarys">
-
-      <ng-container *ngIf="!editItinerarys.includes(itinerary); else editTD">
-        <td>{{itinerary.title}}</td>
-        <td>{{itinerary.description}}</td>
-        <td *ngFor="let tripEvent of itinerary.all_tripEvents">
-          {{tripEvent.name}}
-        </td>
-        <td>{{itinerary.date | date}}</td>
-        <td>{{itinerary.status}}</td>
-      </ng-container>
-
       <ng-template #editTD>
         <td><input type="text" name="title" id="title" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.title"
             placeholder="Title" class="form-control"></td>
@@ -83,19 +41,5 @@
             placeholder="Status" class="form-control">
         </td>
       </ng-template>
-
-      <td class="o">
-        <button class="btn btn-success" (click)="doneItinerary(itinerary)" button title="Submit Itinerary">
-          <i class="fa fa-check"></i>
-        </button>
-        <button class="btn btn-primary" (click)="editItinerary(itinerary)" button title="Edit Itinerary">
-          <i class="fa fa-pencil"></i>
-        </button>
-        <button class="btn btn-danger" (click)="deleteItinerary(itinerary)" button title="Delete Itinerary">
-          <i class="fa fa-trash"></i>
-        </button>
-      </td>
-
-    </tr>
-  </tbody> -->
-</table>
+    </ngb-panel>
+</ngb-accordion>

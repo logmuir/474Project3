@@ -1,3 +1,13 @@
 .acc-content{
     text-indent: 25px;
 }
+
+.business-header {
+	height: 50vh;
+	overflow-x: hidden;
+    background: url('https://www.reviewgeek.com/p/uploads/2018/04/xe0af834a.jpg.pagespeed.gp+jp+jw+pj+ws+js+rj+rp+rw+ri+cp+md.ic.17TDwNCIYg.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
