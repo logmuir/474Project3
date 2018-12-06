@@ -1,3 +1,62 @@
+.search_bar{
+    position: absolute;
+    bottom: 0;
+}
+
+.pot-dest{
+    padding-left: 2%;
+}
+
+.it-list{
+    padding-right: 2%;
+}
+
+.map {
+    width: 100%;
+    height: 400px;
+    background-color: grey;
+}
+
+.title{
+    text-align: center;
+}
+
+/* .dragged_item{
+    padding-bottom: 0%;
+} */
+
+table {
+    border-collapse: collapse;
+}
+
+tr { 
+    border: dotted;
+    border-width: 4px 0;
+}
+
+.name{
+    font-size: 120%;
+    font-weight: bold;
+    color: #259ded;
+}
+
+.category{
+    font-style: italic;
+}
+
+.business-header {
+    height: 85vh;
+    /* height: 100%;
+    width: 100%;
+    margin: 0; */
+    /* min-height: 600px; */
+    background: url('./travel-2081174_960_720.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
+
 .column {
     float: left;
     width: 50%;
@@ -10,10 +69,12 @@
     clear: both;
 }
 
-.ng-table tr.emphasis td {
+.ng-table tr.emphasis {
     background: #DDD;
     background-color: #DDD;
     font-weight: bold;
+    border-bottom: dotted;
+    border-color: black;
 }
 
 .ng-table-rowselected tr {
@@ -32,5 +93,47 @@
 
 .stylish-input-group button{
     border:4;
-    background:transparent;
+    background: #e6ffff;
+}
+
+.submit {
+    background-color: green;
+    color: white;
+}
+
+.trash {
+    background-color: red;
+    color: white;
+}
+
+.submit-content{
+    display: none;
+}
+
+.trash-content{
+    display:none;
+}
+
+/* On mouse-over */
+.submit:hover .submit-content {
+    background: #eee;
+    color: black;
+    display: block;
+}
+
+.trash:hover .trash-content{
+    background: #eee;
+    color: black;
+    display: block;
+}
+
+.itin_num{
+    font-size: 200%;
+    color: purple;
+}
+
+.itin-name{
+    font-size: 100%;
+    color: black;
+    font-weight: bold;
 }

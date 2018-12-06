@@ -7,7 +7,8 @@ var ItinerarySchema = new mongoose.Schema({
     title: String,
     description: String,
     date: Date,
-    status: String
+    status: String,
+    all_tripEvents: Array
 })
 
 ItinerarySchema.plugin(mongoosePaginate)

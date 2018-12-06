@@ -1,0 +1,12 @@
+.img-fluid{
+    height: 240px;
+}
+
+div {
+    padding-bottom: .5em;
+    vertical-align: middle;
+}
+
+.rowColor {
+    background-color: #A3E4D7;
+}
