@@ -34,13 +34,8 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void{
-    if (this.authService.userProfile) {
-      this.profile = this.authService.userProfile;
-    } else {
-      this.authService.getProfile((err, profile) => {
-        this.profile = profile;
-      });
-    }
+    this.authService.profChanges.subscribe(any => this.profile = any);
+    console.log(this.profile); 
   }
 
 

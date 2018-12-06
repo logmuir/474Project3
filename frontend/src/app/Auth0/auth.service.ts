@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
+import {Observable, Observer} from 'rxjs';
+
+
+
 
 (window as any).global = window;
 
@@ -18,6 +22,9 @@ export class AuthService {
     scope: 'openid email profile read:users'
   });
 
+  private observer: Observer <any>;
+  profChanges: Observable<any> = new Observable(obs => this.observer = obs);
+
   constructor(public router: Router) {}
 
   public login(): void {
@@ -30,10 +37,13 @@ export class AuthService {
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/']);
+        this.getProfile(); 
       } else if (err) {
         this.router.navigate(['/']);
         console.log(err);
       }
+    console.log("pls work pls");  
+    
     });
   }
 
@@ -49,7 +59,7 @@ export class AuthService {
 
     this._auth0.logout({
       returnTo:'http://localhost:4200',
-      clientId: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
+      clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
     });
 
     // Remove tokens and expiry time from localStorage
@@ -68,7 +78,7 @@ export class AuthService {
   }
 
 
-public getProfile(cb): void {
+public getProfile(): void {
   const accessToken = localStorage.getItem('access_token');
   if (!accessToken) {
     throw new Error('Access Token must exist to fetch profile');
@@ -77,9 +87,8 @@ public getProfile(cb): void {
   const self = this;
   this._auth0.client.userInfo(accessToken, (err, profile) => {
     if (profile) {
-      self.userProfile = profile;
+      this.observer.next(profile);
     }
-    cb(err, profile);
   });
 }
 
