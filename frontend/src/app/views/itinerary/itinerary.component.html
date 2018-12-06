@@ -40,6 +40,17 @@
           <input type="text" name="status" id="status" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.status"
             placeholder="Status" class="form-control">
         </td>
+        <td class="o">
+          <button class="btn btn-success" (click)="doneItinerary(itinerary)" button title="Submit Itinerary">
+            <i class="fa fa-check"></i>
+          </button>
+          <button class="btn btn-primary" (click)="editItinerary(itinerary)" button title="Edit Itinerary">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button class="btn btn-danger" (click)="deleteItinerary(itinerary)" button title="Delete Itinerary">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
       </ng-template>
     </ngb-panel>
 </ngb-accordion>
