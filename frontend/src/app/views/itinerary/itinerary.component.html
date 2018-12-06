@@ -14,11 +14,13 @@
       <ngb-panel title={{itinerary.title}}>
         <ng-template ngbPanelContent>
           <div class="acc-content" *ngIf="!editItinerarys.includes(itinerary); else editTD">
+            <p>Title: {{itinerary.title}}</p>
             <p>Description: {{itinerary.description}}</p>
-            <p>Date: {{itinerary.start_date}}</p>
-            <p>Date: {{itinerary.end_date}}</p>
+            <p>Start Date: {{itinerary.start_date}}</p>
+            <p>End Date: {{itinerary.end_date}}</p>
             <p>Status: {{itinerary.status}}</p>
           </div>
+          
 
           <ng-template #editTD>
             <td><input type="text" name="title" id="title" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.title"
