@@ -3,24 +3,32 @@ import { ItineraryService } from './../../Itinerary/services/itinerary.service';
 import Itinerary from './../../Itinerary/models/itinerary.model';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Auth0/auth.service';
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'itineraryComponentSelector',
   templateUrl: './itinerary.component.html',
   styleUrls: ['./itinerary.component.css']
 })
+
 export class ItineraryComponent implements OnInit {
+
+
 
   constructor(
     //Private itineraryservice will be injected into the component by Angular Dependency Injector
     private itineraryService: ItineraryService,
-    private authService: AuthService
+    private http: HttpClient
   ) { }
 
-  
+
   //An Empty list for the visible itinerary list
   existingItinerarys: Itinerary[];
   editItinerarys: Itinerary[] = [];
+
+  userAccessToken: String;
 
   private currentUserEmail: string;
 
@@ -38,6 +46,19 @@ export class ItineraryComponent implements OnInit {
         })
       }
     }
+  }
+
+  getUserInformation() {
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + <string>this.userAccessToken
+      })
+    }
+    this.http.get("https://maazn.auth0.com/userinfo", httpOptions).subscribe(
+      resp => console.log("Hello " + resp["nickname"]
+      ));
+
+    console.log('hello ' + this.userAccessToken);
   }
 
   doneItinerary(itinerary: Itinerary) {
@@ -69,7 +90,7 @@ export class ItineraryComponent implements OnInit {
       .subscribe(itinerarys => {
         this.existingItinerarys = itinerarys
       })
-
-    console.log(this.authService.getEmail())
+    this.userAccessToken = localStorage.getItem('access_token');
+    this.getUserInformation();
   }
 }

@@ -12,10 +12,10 @@ export class AppComponent implements OnInit {
   title = 'Travel Express';
   profile: any;
 
-  constructor(
-    private authService: AuthService
-  ) {
+  constructor(public authService: AuthService) {
     this.authService.handleAuthentication();
+    this.authService.scheduleRenewal();
+    console.log("Scheduled renewal!")
   }
 
   login(): void {
@@ -31,6 +31,5 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.profChanges.subscribe(any => this.profile = any);
   }
 }

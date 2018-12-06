@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ItineraryService {
 
-  api_url = 'http://localhost:3000';
+  api_url = 'http://localhost:3001';
   itineraryUrl = `${this.api_url}/api/itinerarys`;
 
   constructor(

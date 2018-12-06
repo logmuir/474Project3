@@ -25,6 +25,8 @@
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "@types/jest": "^23.3.10",
     "@types/mocha": "^5.2.5",
+    "angular-auth0": "^3.0.0",
+    "auth0-js": "^9.8.2",
     "bootstrap": "^4.0.0-beta",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",

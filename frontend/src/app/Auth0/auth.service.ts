@@ -1,21 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { filter } from 'rxjs/operators';
+import { mergeMap, filter } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
-import { Observable, Observer } from 'rxjs';
-
-
-
+import {Observable} from 'rxjs/Rx';
 
 (window as any).global = window;
 
 @Injectable()
 export class AuthService {
 
-  userProfile: any;
-  userEmail: any;
+  refreshSubscription: any;
 
-  private _auth0 = new auth0.WebAuth({
+  auth0 = new auth0.WebAuth({
     clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
     domain: 'maazn.auth0.com',
     responseType: 'token id_token',
@@ -23,18 +19,10 @@ export class AuthService {
     scope: 'openid email profile'
   });
 
-  private observer: Observer<any>;
-  profChanges: Observable<any> = new Observable(obs => this.observer = obs);
-
-  constructor(public router: Router) { }
-
-  public login(): void {
-    this._auth0.authorize();
-  }
-
   public handleAuthentication(): void {
-    this._auth0.parseHash((err, authResult) => {
+    this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log(authResult)
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/home']);
@@ -42,28 +30,31 @@ export class AuthService {
         this.router.navigate(['/home']);
         console.log(err);
       }
+
+      else {
+        console.log(localStorage.getItem('access_token'))
+      }
     });
   }
-
   private setSession(authResult): void {
     // Set the time that the Access Token will expire at
-    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
+    const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + Date.now());
+
+    localStorage.setItem('authResult', authResult)
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+
+    this.scheduleRenewal();
   }
 
   public logout(): void {
-
-    this._auth0.logout({
-      returnTo: 'http://localhost:4200',
-      clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
-    });
-
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    this.unscheduleRenewal();
+
     // Go back to the home route
     this.router.navigate(['/']);
   }
@@ -75,18 +66,54 @@ export class AuthService {
     return new Date().getTime() < expiresAt;
   }
 
-  public getEmail(): void {
-    const accessToken = localStorage.getItem('access_token');
-    if (!accessToken) {
-      throw new Error('Access Token must exist to fetch profile');
-    }
+  constructor(public router: Router) { }
 
-    const self = this;
-    this._auth0.client.userInfo(accessToken, (err, email) => {
-      if (email) {
-        this.userEmail = email;
+  public login(): void {
+    this.auth0.authorize();
+  }
+
+  public renewToken() {
+    this.auth0.checkSession({}, (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        this.setSession(result);
       }
     });
+  }
+
+  public scheduleRenewal() {
+    if (!this.isAuthenticated()) { return; }
+    this.unscheduleRenewal();
+
+    const expiresAt = JSON.parse(window.localStorage.getItem('expires_at'));
+
+    const expiresIn$ = Observable.of(expiresAt).pipe(
+      mergeMap(
+        expiresAt => {
+          const now = Date.now();
+          // Use timer to track delay until expiration
+          // to run the refresh at the proper time
+          return Observable.timer(Math.max(1, expiresAt - now));
+        }
+      )
+    );
+
+    // Once the delay time from above is
+    // reached, get a new JWT and schedule
+    // additional refreshes
+    this.refreshSubscription = expiresIn$.subscribe(
+      () => {
+        this.renewToken();
+        this.scheduleRenewal();
+      }
+    );
+  }
+
+  public unscheduleRenewal() {
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
   }
 
 }
