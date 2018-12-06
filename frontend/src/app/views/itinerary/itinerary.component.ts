@@ -77,6 +77,19 @@ export class ItineraryComponent implements OnInit {
       })
   }
 
+  getTripEventsOfItinerary(itinerary: Itinerary): String {
+    let outputString = "";
+    let currentIndex = 0;
+    itinerary.all_tripEvents.forEach(tripEvent => {
+      outputString += tripEvent.name;
+      if (currentIndex != itinerary.all_tripEvents.length - 1) {
+        outputString += ", ";
+      }
+      currentIndex++;
+    });
+    return outputString;
+  }
+
   ngOnInit(): void {
     this.userAccessToken = localStorage.getItem('access_token');
 

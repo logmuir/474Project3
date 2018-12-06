@@ -18,6 +18,7 @@
           <td><b>Start Date:</b> {{itinerary.start_date}}</td>
           <td><b>End Date:</b> {{itinerary.end_date}}</td>
           <td><b>Status:</b> {{itinerary.status}}</td>
+          
           <td class="o">
             <button class="btn btn-success" (click)="doneItinerary(itinerary)" button title="Submit Itinerary">
               <i class="fa fa-check"></i>
@@ -29,7 +30,15 @@
               <i class="fa fa-trash"></i>
             </button>
           </td>
+          <tr>
+              <td><b>TripEvents: </b>{{getTripEventsOfItinerary(itinerary)}}</td>
+
+          </tr>
         </div>
+      </ng-template>
+      <ng-template ngbPanelContent>
+          <div class="acc-content">
+          </div>
       </ng-template>
       <ng-template #editTD>
         <td><input type="text" name="title" id="title" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.title"
