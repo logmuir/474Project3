@@ -3,8 +3,7 @@ import { ItineraryService } from './../../Itinerary/services/itinerary.service';
 import Itinerary from './../../Itinerary/models/itinerary.model';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Auth0/auth.service';
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -14,15 +13,12 @@ import { HttpHeaders } from '@angular/common/http';
 })
 
 export class ItineraryComponent implements OnInit {
-
-
-
+  
   constructor(
     //Private itineraryservice will be injected into the component by Angular Dependency Injector
     private itineraryService: ItineraryService,
     private http: HttpClient
   ) { }
-
 
   //An Empty list for the visible itinerary list
   existingItinerarys: Itinerary[];
@@ -102,7 +98,7 @@ export class ItineraryComponent implements OnInit {
 
     this.http.get("https://maazn.auth0.com/userinfo", httpOptions).subscribe(
       resp => this.getItineraries(resp["email"])
-      );
+    );
 
   }
 }

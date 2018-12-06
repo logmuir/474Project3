@@ -5,8 +5,10 @@ import { Itinerary } from './../../Itinerary/models/itinerary.model';
 import { TripEvent } from './../../TripEvent/models/tripEvent.model';
 import { ItineraryService } from '../../Itinerary/services/itinerary.service'
 import { createEmptyStateSnapshot } from '@angular/router/src/router_state';
-import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
-import {Router} from '@angular/router';
+import { NgbDate, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 
 @Component({
@@ -33,12 +35,16 @@ export class ItineraryDataComponent implements OnInit {
   fromDate: NgbDate;
   toDate: NgbDate;
 
-  constructor(private router: Router, private foursquareService: FoursquareService, private itineraryService: ItineraryService, calendar: NgbCalendar) {
+  userAccessToken: String;
+
+  constructor(private http: HttpClient, private router: Router, private foursquareService: FoursquareService, private itineraryService: ItineraryService, calendar: NgbCalendar) {
     this.fromDate = calendar.getToday();
     this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
 
   onDateSelection(date: NgbDate) {
     if (!this.fromDate && !this.toDate) {
@@ -50,14 +56,6 @@ export class ItineraryDataComponent implements OnInit {
       this.fromDate = date;
     }
   }
-
-  // saveDate(from: any, to: any){
-  //   var start_date:string= from.month + "/" + from.day + "/" + from.year;
-  //   var end_date:string= to.month + "/" + to.day + "/" + to.year;
-  //   console.log(start_date);
-  //   console.log(end_date);
-    // var start_date:string={:e.dragData.venue.name,formattedAddress:e.dragData.venue.location.address,order:it_order};
-  //}
 
   isHovered(date: NgbDate) {
     return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
@@ -93,25 +91,39 @@ export class ItineraryDataComponent implements OnInit {
   }
 
   onSaveButtonClick(title: string, description: string, from: any, to: any): void {
-    let generatedItinerary = this.generateItinerary(title, description, from, to);
+    this.userAccessToken = localStorage.getItem('access_token');
+
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + <string>this.userAccessToken
+      })
+    }
+
+
+    this.http.get("https://maazn.auth0.com/userinfo", httpOptions).subscribe(
+      resp => this.processUserEmailResponse(resp["email"], title, description, from, to)
+    );
+  }
+
+  processUserEmailResponse(ownerEmail: string, title: string, description: string, from: any, to: any): void {
+    let generatedItinerary = this.generateItinerary(ownerEmail, title, description, from, to);
     console.log(generatedItinerary)
     this.saveItinerary(generatedItinerary);
     this.router.navigate(['/myItineraries'])
   }
 
   saveItinerary(itinerary: Itinerary): void {
-    this.itineraryService.createItinerary(itinerary)	
-    .subscribe((res) => {	
-      console.log(res);
-    })
+    this.itineraryService.createItinerary(itinerary)
+      .subscribe((res) => {
+        console.log(res);
+      })
   }
 
-  generateItinerary(title: string, description, from: any, to: any): Itinerary {
-    var start_date:string= from.month + "/" + from.day + "/" + from.year;
-    var end_date:string= to.month + "/" + to.day + "/" + to.year;
-    console.log(start_date);
-    console.log(end_date);
-    let newItinerary = new Itinerary("loganmuir123@gmail.com", title, description, start_date, end_date, "incomplete", this.all_tripEvents);
+  generateItinerary(ownerEmail: string, title: string, description, from: any, to: any): Itinerary {
+    var start_date: string = from.month + "/" + from.day + "/" + from.year;
+    var end_date: string = to.month + "/" + to.day + "/" + to.year;
+
+    let newItinerary = new Itinerary(ownerEmail, title, description, start_date, end_date, "incomplete", this.all_tripEvents);
     return newItinerary;
   }
 
@@ -142,13 +154,13 @@ export class ItineraryDataComponent implements OnInit {
     console.log("index: " + index);
   }
 
-  onItemDelete(ev){
+  onItemDelete(ev) {
     console.log("delete process start");
     console.log(ev.dragData);
     var index = this.all_tripEvents.indexOf(ev.dragData);
-    if(index >-1){
-      if(index < this.all_tripEvents.length - 1){
-        for(var i=index; i<this.all_tripEvents.length; i++){
+    if (index > -1) {
+      if (index < this.all_tripEvents.length - 1) {
+        for (var i = index; i < this.all_tripEvents.length; i++) {
           this.all_tripEvents[i].order = this.all_tripEvents[i].order - 1;
         }
       }
@@ -162,7 +174,7 @@ export class ItineraryDataComponent implements OnInit {
   onItemDrop(e: any) {
     console.log("item drop");
     var it_order = this.all_tripEvents.length;
-    const record:TripEvent={name:e.dragData.venue.name,formattedAddress:e.dragData.venue.location.address,order:it_order};
+    const record: TripEvent = { name: e.dragData.venue.name, formattedAddress: e.dragData.venue.location.address, order: it_order };
     console.log(record);
 
     this.all_tripEvents.push(record);
