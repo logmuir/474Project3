@@ -19,6 +19,7 @@
                     <li class="nav-item"><a class="nav-link" *ngIf="!isAuthenticated()" (click)="login()">Login
                             {{userEmail}}</a></li>
                     <li class="nav-item"><a class="nav-link" *ngIf="isAuthenticated()" (click)="logout()">Logout</a></li>
+                    <li class="nav-item"><a class="nav-link" *ngIf="isAuthenticated()" routerLink="profile">Profile</a></li>
                 </ul>
             </div>
         </div>

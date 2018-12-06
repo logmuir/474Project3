@@ -11,6 +11,7 @@ import { from } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'Travel Express';
   profile: any;
+  email;
 
   constructor(
     private authService: AuthService
@@ -30,9 +31,8 @@ export class AppComponent implements OnInit {
     return this.authService.isAuthenticated();
   }
 
-  ngOnInit(): void {
-    this.authService.profChanges.subscribe(any => this.profile = any);
-    console.log(this.profile);
+  ngOnInit() {
+
   }
 
 

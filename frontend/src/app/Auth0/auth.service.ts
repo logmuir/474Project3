@@ -12,8 +12,7 @@ import { Observable, Observer } from 'rxjs';
 @Injectable()
 export class AuthService {
 
-  userProfile: any;
-  userEmail: any;
+  userProfile: String;
 
   private _auth0 = new auth0.WebAuth({
     clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
@@ -75,17 +74,18 @@ export class AuthService {
     return new Date().getTime() < expiresAt;
   }
 
-  public getEmail(): void {
+  public getProfile(cb): void {
     const accessToken = localStorage.getItem('access_token');
     if (!accessToken) {
       throw new Error('Access Token must exist to fetch profile');
     }
-
+  
     const self = this;
-    this._auth0.client.userInfo(accessToken, (err, email) => {
-      if (email) {
-        this.userEmail = email;
+    this._auth0.client.userInfo(accessToken, (err, profile) => {
+      if (profile) {
+        self.userProfile = profile;
       }
+      cb(err, profile);
     });
   }
 
