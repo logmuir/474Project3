@@ -8,7 +8,7 @@ import {AuthService} from './Auth0/auth.service';
   // styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit {
   title = 'Travel Express';
   profile: any;
 
