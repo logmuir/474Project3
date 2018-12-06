@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, AfterViewInit } from '@angular/core';
 import {AuthService} from './Auth0/auth.service';
   import { from } from 'rxjs';
 
@@ -7,7 +7,7 @@ import {AuthService} from './Auth0/auth.service';
   templateUrl: './app.component.html'
   // styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnChanges {
+export class AppComponent implements OnInit, OnChanges, AfterViewInit{
 
   title = 'Travel Express';
   profile: any;
@@ -37,6 +37,7 @@ export class AppComponent implements OnInit, OnChanges {
     this.authService.profChanges.subscribe(any => this.profile = any);
     console.log(this.profile); 
   }
+
 
 
 }

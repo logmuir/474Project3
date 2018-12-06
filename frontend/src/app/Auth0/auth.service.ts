@@ -37,13 +37,12 @@ export class AuthService {
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/']);
-        this.getProfile(); 
+        
       } else if (err) {
         this.router.navigate(['/']);
         console.log(err);
       }
-    console.log("pls work pls");  
-    
+    this.getProfile(); 
     });
   }
 
