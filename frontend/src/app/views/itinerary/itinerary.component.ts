@@ -2,6 +2,7 @@ import { Response } from '@angular/http';
 import { ItineraryService } from './../../Itinerary/services/itinerary.service';
 import Itinerary from './../../Itinerary/models/itinerary.model';
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../Auth0/auth.service';
 
 @Component({
   selector: 'itineraryComponentSelector',
@@ -12,7 +13,8 @@ export class ItineraryComponent implements OnInit {
 
   constructor(
     //Private itineraryservice will be injected into the component by Angular Dependency Injector
-    private itineraryService: ItineraryService
+    private itineraryService: ItineraryService,
+    private authService: AuthService
   ) { }
 
   
@@ -67,5 +69,7 @@ export class ItineraryComponent implements OnInit {
       .subscribe(itinerarys => {
         this.existingItinerarys = itinerarys
       })
+
+    console.log(this.authService.getEmail())
   }
 }

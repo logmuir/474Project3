@@ -32,9 +32,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.profChanges.subscribe(any => this.profile = any);
-    console.log(this.profile);
   }
-
-
-
 }
