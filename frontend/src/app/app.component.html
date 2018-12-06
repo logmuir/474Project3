@@ -15,6 +15,11 @@
                     <li class="nav-item"><a class="nav-link" routerLink="itineraryBuilder">Build an Itinerary</a></li>
                     <li class="nav-item"><a class="nav-link" routerLink="contactus">Contact Us</a></li>
                 </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" *ngIf="!isAuthenticated()" (click)="login()">Login
+                            {{userEmail}}</a></li>
+                    <li class="nav-item"><a class="nav-link" *ngIf="isAuthenticated()" (click)="logout()">Logout</a></li>
+                </ul>
             </div>
         </div>
     </nav>

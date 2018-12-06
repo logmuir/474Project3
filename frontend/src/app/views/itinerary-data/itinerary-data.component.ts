@@ -109,7 +109,7 @@ export class ItineraryDataComponent implements OnInit {
     var end_date:string= to.month + "/" + to.day + "/" + to.year;
     console.log(start_date);
     console.log(end_date);
-    let newItinerary = new Itinerary("test@gmail.com", title, description, start_date, end_date, "incomplete", this.all_tripEvents);
+    let newItinerary = new Itinerary("loganmuir123@gmail.com", title, description, start_date, end_date, "incomplete", this.all_tripEvents);
     return newItinerary;
   }
 

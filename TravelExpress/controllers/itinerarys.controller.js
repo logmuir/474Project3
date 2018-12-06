@@ -43,6 +43,7 @@ exports.createItinerary = async function (req, res, next) {
   
     var itinerary = {
         title: req.body.title,
+        ownerEmail: req.body.ownerEmail,
         description: req.body.description,
         start_date: req.body.start_date,
         end_date: req.body.end_date,
