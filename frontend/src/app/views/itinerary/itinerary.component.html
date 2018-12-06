@@ -15,7 +15,8 @@
         <ng-template ngbPanelContent>
           <div class="acc-content" *ngIf="!editItinerarys.includes(itinerary); else editTD">
             <p>Description: {{itinerary.description}}</p>
-            <p>Date: {{itinerary.date | date}}</p>
+            <p>Date: {{itinerary.start_date}}</p>
+            <p>Date: {{itinerary.end_date}}</p>
             <p>Status: {{itinerary.status}}</p>
           </div>
 
