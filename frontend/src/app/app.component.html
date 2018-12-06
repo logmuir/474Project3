@@ -15,8 +15,7 @@
                 <li class="nav-item"><a class="nav-link" routerLink="courses">Contact Us</a></li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <a class="navbar-brand" navbar-light>{{profile?.nickname}}</a>
-                <li class="nav-item"><a class="nav-link" *ngIf="!isAuthenticated()" (click)="login()">Login</a></li>
+                <li class="nav-item"><a class="nav-link" *ngIf="!isAuthenticated()" (click)="login()">Login {{userEmail}}</a></li>
                 <li class="nav-item"><a class="nav-link" *ngIf="isAuthenticated()" (click)="logout()">Logout</a></li>
             </ul>
         </div>

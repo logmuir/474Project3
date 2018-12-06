@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as auth0 from 'auth0-js';
-import {Observable, Observer} from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 
 
 
@@ -13,6 +13,7 @@ import {Observable, Observer} from 'rxjs';
 export class AuthService {
 
   userProfile: any;
+  userEmail: any;
 
   private _auth0 = new auth0.WebAuth({
     clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
@@ -22,10 +23,10 @@ export class AuthService {
     scope: 'openid email profile'
   });
 
-  private observer: Observer <any>;
+  private observer: Observer<any>;
   profChanges: Observable<any> = new Observable(obs => this.observer = obs);
 
-  constructor(public router: Router) {}
+  constructor(public router: Router) { }
 
   public login(): void {
     this._auth0.authorize();
@@ -37,7 +38,6 @@ export class AuthService {
         window.location.hash = '';
         this.setSession(authResult);
         this.router.navigate(['/home']);
-        this.getProfile();       
       } else if (err) {
         this.router.navigate(['/home']);
         console.log(err);
@@ -56,7 +56,7 @@ export class AuthService {
   public logout(): void {
 
     this._auth0.logout({
-      returnTo:'http://localhost:4200',
+      returnTo: 'http://localhost:4200',
       clientID: 'TxN0CYFS2ZJhRNt1-AlMnQAlWVXZoU1T',
     });
 
@@ -75,19 +75,18 @@ export class AuthService {
     return new Date().getTime() < expiresAt;
   }
 
-
-public getProfile(): void {
-  const accessToken = localStorage.getItem('access_token');
-  if (!accessToken) {
-    throw new Error('Access Token must exist to fetch profile');
-  }
-
-  const self = this;
-  this._auth0.client.userInfo(accessToken, (err, profile) => {
-    if (profile) {
-      this.observer.next(profile);
+  public getEmail(): void {
+    const accessToken = localStorage.getItem('access_token');
+    if (!accessToken) {
+      throw new Error('Access Token must exist to fetch profile');
     }
-  });
-}
+
+    const self = this;
+    this._auth0.client.userInfo(accessToken, (err, email) => {
+      if (email) {
+        this.userEmail = email;
+      }
+    });
+  }
 
 }
