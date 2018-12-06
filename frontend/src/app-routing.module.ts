@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ItineraryComponent } from './app/views/itinerary/itinerary.component';
 import { AboutComponent } from './app/about/about.component';
 import { ContactusComponent } from './app/contactus/contactus.component';
+import { ProfileComponent } from './app/profile/profile.component';
 
 const routes: Routes = [
 
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: 'contactus',
     component: ContactusComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   }
 ];
 

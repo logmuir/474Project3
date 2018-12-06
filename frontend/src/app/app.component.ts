@@ -11,6 +11,7 @@ import { from } from 'rxjs';
 export class AppComponent implements OnInit {
   title = 'Travel Express';
   profile: any;
+  email;
 
   constructor(public authService: AuthService) {
     this.authService.handleAuthentication();

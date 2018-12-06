@@ -21,6 +21,7 @@ import { NgDragDropModule } from 'ng-drag-drop';
 import 'hammerjs';
 import { ContactusComponent } from './contactus/contactus.component';
 import { AuthService } from './Auth0/auth.service';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AuthService } from './Auth0/auth.service';
     HomeComponent,
     ItineraryComponent,
     TripEventComponent,
-    ContactusComponent
+    ContactusComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
