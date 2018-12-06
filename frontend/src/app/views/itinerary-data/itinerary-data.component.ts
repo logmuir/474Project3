@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FoursquareService } from '../../Foursquare/services/foursquare.service';
 import 'rxjs/Rx';
-import { Itinerary } from "../../Itinerary/models/itinerary.model";
+import { Itinerary } from './../../Itinerary/models/itinerary.model';
 import { TripEvent } from './../../TripEvent/models/tripEvent.model';
 import { ItineraryService } from '../../Itinerary/services/itinerary.service'
 import { createEmptyStateSnapshot } from '@angular/router/src/router_state';
+import {NgbDate, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-itinerary-data',
@@ -26,10 +27,47 @@ export class ItineraryDataComponent implements OnInit {
   place: string = null;
   category: string = null;
   droppedItems: Object[] = [];
+  hoveredDate: NgbDate;
+  fromDate: NgbDate;
+  toDate: NgbDate;
 
-  constructor(private foursquareService: FoursquareService, private itineraryService: ItineraryService) { }
+  constructor(private foursquareService: FoursquareService, private itineraryService: ItineraryService, calendar: NgbCalendar) {
+    this.fromDate = calendar.getToday();
+    this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+  }
 
   ngOnInit() { }
+
+  onDateSelection(date: NgbDate) {
+    if (!this.fromDate && !this.toDate) {
+      this.fromDate = date;
+    } else if (this.fromDate && !this.toDate && date.after(this.fromDate)) {
+      this.toDate = date;
+    } else {
+      this.toDate = null;
+      this.fromDate = date;
+    }
+  }
+
+  // saveDate(from: any, to: any){
+  //   var start_date:string= from.month + "/" + from.day + "/" + from.year;
+  //   var end_date:string= to.month + "/" + to.day + "/" + to.year;
+  //   console.log(start_date);
+  //   console.log(end_date);
+    // var start_date:string={:e.dragData.venue.name,formattedAddress:e.dragData.venue.location.address,order:it_order};
+  //}
+
+  isHovered(date: NgbDate) {
+    return this.fromDate && !this.toDate && this.hoveredDate && date.after(this.fromDate) && date.before(this.hoveredDate);
+  }
+
+  isInside(date: NgbDate) {
+    return date.after(this.fromDate) && date.before(this.toDate);
+  }
+
+  isRange(date: NgbDate) {
+    return date.equals(this.fromDate) || date.equals(this.toDate) || this.isInside(date) || this.isHovered(date);
+  }
 
   getEvents() {
     this.foursquareService
@@ -39,38 +77,33 @@ export class ItineraryDataComponent implements OnInit {
       });
   }
 
-  getId() {
-    //this.foursquareService.
-  }
-
   onSearchButtonClick(stringToSearchFor: string): void {
     this.place = stringToSearchFor;
     this.show = true;
     this.getEvents();
   }
 
-  onSaveButtonClick(): void {
-    let generatedItinerary = this.generateItinerary();
+  onSaveButtonClick(title: string, description: string, from: any, to: any): void {
+    let generatedItinerary = this.generateItinerary(title, description, from, to);
     console.log(generatedItinerary)
     this.saveItinerary(generatedItinerary);
 
   }
 
   saveItinerary(itinerary: Itinerary): void {
-    
     this.itineraryService.createItinerary(itinerary);
-
     this.itineraryService.createItinerary(itinerary)	
     .subscribe((res) => {	
       console.log(res);
     })
   }
 
-  generateItinerary(): Itinerary {
-    
-
-    let newItinerary = new Itinerary("test@gmail.com", "Title Goes Here!", "Description goes here!", new Date( 2018, 1, 4), "Itinerary Status", this.all_tripEvents);
-
+  generateItinerary(title: string, description, from: any, to: any): Itinerary {
+    var start_date:string= from.month + "/" + from.day + "/" + from.year;
+    var end_date:string= to.month + "/" + to.day + "/" + to.year;
+    console.log(start_date);
+    console.log(end_date);
+    let newItinerary = new Itinerary("test@gmail.com", title, description, start_date, end_date, "incomplete", this.all_tripEvents);
     return newItinerary;
   }
 
@@ -97,7 +130,6 @@ export class ItineraryDataComponent implements OnInit {
   onVerticalDrag(ev) {
     console.log("vertical drag");
     console.log(ev);
-    //ev.dataTransfer.setData("text", ev.target.id);
     var index = this.droppedItems.indexOf(ev.dragData);
     console.log("index: " + index);
   }
@@ -124,8 +156,7 @@ export class ItineraryDataComponent implements OnInit {
     var it_order = this.all_tripEvents.length;
     const record:TripEvent={name:e.dragData.venue.name,formattedAddress:e.dragData.venue.location.address,order:it_order};
     console.log(record);
-    
-    //this.record.order = order;
+
     this.all_tripEvents.push(record);
     console.log("this.all_tripEvents: " + this.all_tripEvents);
     // Get the dropped data here

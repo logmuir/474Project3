@@ -8,7 +8,54 @@
       <th class="h">Options</th>
     </tr>
   </thead>
-  <tbody>
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <tr class="itinerary" (dblclick)="editItinerary(itinerary)" *ngFor="let itinerary of existingItinerarys">
+      <ngb-panel title={{itinerary.title}}>
+        <ng-template ngbPanelContent>
+          <div class="acc-content" *ngIf="!editItinerarys.includes(itinerary); else editTD">
+            <p>Description: {{itinerary.description}}</p>
+            <p>Date: {{itinerary.date | date}}</p>
+            <p>Status: {{itinerary.status}}</p>
+          </div>
+
+          <ng-template #editTD>
+            <td><input type="text" name="title" id="title" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.title"
+                placeholder="Title" class="form-control"></td>
+            <td><input type="text" name="description" id="description" (keypress)="submitItinerary($event, itinerary)"
+                [(ngModel)]="itinerary.description" placeholder="Description" class="form-control"></td>
+            <td>{{itinerary.date | date}}</td>
+            <td>
+              <input type="text" name="status" id="status" (keypress)="submitItinerary($event, itinerary)" [(ngModel)]="itinerary.status"
+                placeholder="Status" class="form-control">
+            </td>
+          </ng-template>
+
+
+          <td class="o">
+            <button class="btn btn-success" (click)="doneItinerary(itinerary)" button title="Submit Itinerary">
+              <i class="fa fa-check"></i>
+            </button>
+            <button class="btn btn-primary" (click)="editItinerary(itinerary)" button title="Edit Itinerary">
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button class="btn btn-danger" (click)="deleteItinerary(itinerary)" button title="Delete Itinerary">
+              <i class="fa fa-trash"></i>
+            </button>
+          </td>
+        </ng-template>
+      </ngb-panel>
+      <!-- NEXT PANEL-->
+      <!-- <ngb-panel title="Simple">
+       <ng-template ngbPanelContent> content
+        </ng-template>
+    </ngb-panel> -->
+      <!-- LAST PANEL-->
+      <!-- <ngb-panel title="Simple">
+      <ng-template ngbPanelContent>content
+      </ng-template>
+    </ngb-panel> -->
+  </ngb-accordion>
+  <!-- <tbody>
     <tr class="itinerary" (dblclick)="editItinerary(itinerary)" *ngFor="let itinerary of existingItinerarys">
 
       <ng-container *ngIf="!editItinerarys.includes(itinerary); else editTD">
@@ -43,5 +90,5 @@
       </td>
 
     </tr>
-  </tbody>
+  </tbody> -->
 </table>

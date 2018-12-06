@@ -5,18 +5,18 @@ export class Itinerary {
     ownerEmail: string;
     title: string;
     description: string;
-    date: Date;
+    start_date: string;
+    end_date: string;
     status: string;
     all_tripEvents: TripEvent[];
 
-    constructor(ownerEmail: string, title: string, description: string, date: Date, status: string, all_tripEvents: TripEvent[]) {
+    constructor(ownerEmail: string, title: string, description: string, start_date: string, end_date: string, status: string, all_tripEvents: TripEvent[]) {
         this.ownerEmail = ownerEmail;
         this.title = title;
         this.description = description;
-        this.date = date;
+        this.start_date = start_date;
+        this.end_date = end_date;
         this.status = status;
         this.all_tripEvents = all_tripEvents;
     }
-}
-
-export default Itinerary;
+}export default Itinerary;

@@ -31,7 +31,6 @@
                 </button>
             </div>
         </div>
-        <!-- </div> -->
     </div>
     <div ng-controller="GridController">
         <ng-container *ngIf="show">
@@ -58,11 +57,31 @@
                 </div>
                 <div class="col-sm-1"></div>
                 <div class="col-sm-6 it-list">
-                    <div droppable (onDrop)="onItemDrop($event)">
+                    <!-- <div droppable (onDrop)="onItemDrop($event)"> -->
                         <br>
                         <h2>Your Itinerary</h2>
                         <div>
-                            <br>
+                            <ngb-datepicker #dp (select)="onDateSelection($event)" [displayMonths]="2" [dayTemplate]="t"
+                                outsideDays="hidden">
+                            </ngb-datepicker>
+                            <ng-template #t let-date let-focused="focused">
+                                <span class="custom-day" [class.focused]="focused" [class.range]="isRange(date)"
+                                    [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                                    (mouseleave)="hoveredDate = null">
+                                    {{ date.day }}
+                                </span>
+                            </ng-template>
+                            <hr>
+                        </div>
+                        <div class="input-group stylish-input-group">
+                            <input #title type="text" class="form-control" placeholder="Itinerary Title">
+                        </div>
+                        <div class="input-group stylish-input-group">
+                            <input #description type="text" class="form-control" placeholder="Description">
+                        </div>
+                        <br>
+                        <div droppable (onDrop)="onItemDrop($event)">
+                            <h2>Drop places here!</h2>
                         </div>
                         <div class="panel-body">
                             <div class="dragged_item" *ngFor="let tripEvent of all_tripEvents" class="list-group-item"
@@ -77,9 +96,9 @@
                                 </span>
                             </div>
                         </div>
-                    </div>
+                    <!-- </div> -->
                     <ng-container *ngIf="show">
-                        <button class="btn btn-outline-primary submit" *ngIf='droppedItems.length' (click)="onSaveButtonClick()">Save</button>
+                        <button class="btn btn-outline-primary submit" *ngIf='droppedItems.length' (click)="onSaveButtonClick(title.value, description.value, fromDate, toDate)">Save</button>
                         <div class="submit-content">
                             <p>
                                 Save your itinerary! Once it is saved, you can edit, rename, and share.
