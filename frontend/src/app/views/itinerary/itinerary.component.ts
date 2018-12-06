@@ -15,22 +15,12 @@ export class ItineraryComponent implements OnInit {
     private itineraryService: ItineraryService
   ) { }
 
-  //Declaring the new itinerary Object and initilizing it
-  public newItinerary: Itinerary = new Itinerary()
-
+  
   //An Empty list for the visible itinerary list
   existingItinerarys: Itinerary[];
   editItinerarys: Itinerary[] = [];
 
   private currentUserEmail: string;
-
-  create() {
-    this.itineraryService.createItinerary(this.newItinerary)
-      .subscribe((res) => {
-        this.existingItinerarys.push(res.data)
-        this.newItinerary = new Itinerary()
-      })
-  }
 
   editItinerary(itinerary: Itinerary) {
     if (this.existingItinerarys.includes(itinerary)) {
@@ -71,7 +61,7 @@ export class ItineraryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUserEmail = 'test@gmail.com';
+    // this.currentUserEmail = 'test@gmail.com';
     // this.currentUserEmail = 'anotherTest@gmail.com';
     this.itineraryService.getItinerarys(this.currentUserEmail)
       .subscribe(itinerarys => {

@@ -3,6 +3,7 @@
     <tr class="h">
       <th class="h">Title</th>
       <th class="h">Description</th>
+      <th class="h">Events</th>
       <th class="h">Date</th>
       <th class="h">Status</th>
       <th class="h">Options</th>
@@ -14,6 +15,9 @@
       <ng-container *ngIf="!editItinerarys.includes(itinerary); else editTD">
         <td>{{itinerary.title}}</td>
         <td>{{itinerary.description}}</td>
+        <td *ngFor="let tripEvent of itinerary.all_tripEvents">
+          {{tripEvent.name}}
+        </td>
         <td>{{itinerary.date | date}}</td>
         <td>{{itinerary.status}}</td>
       </ng-container>
@@ -31,17 +35,20 @@
       </ng-template>
 
       <td class="o">
-        <button class="btn btn-success" (click)="doneItinerary(itinerary)" button title = "Submit Itinerary">
+        <button class="btn btn-success" (click)="doneItinerary(itinerary)" button title="Submit Itinerary">
           <i class="fa fa-check"></i>
         </button>
-        <button class="btn btn-primary" (click)="editItinerary(itinerary)" button title = "Edit Itinerary">
+        <button class="btn btn-primary" (click)="editItinerary(itinerary)" button title="Edit Itinerary">
           <i class="fa fa-pencil"></i>
         </button>
-        <button class="btn btn-danger" (click)="deleteItinerary(itinerary)" button title = "Delete Itinerary">
+        <button class="btn btn-danger" (click)="deleteItinerary(itinerary)" button title="Delete Itinerary">
           <i class="fa fa-trash"></i>
         </button>
       </td>
 
     </tr>
+  </tbody>
+  <tbody *ngFor="let itinerary of existingItinerarys">
+
   </tbody>
 </table>
